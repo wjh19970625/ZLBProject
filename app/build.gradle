@@ -1,0 +1,79 @@
+apply plugin: 'com.android.application'
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd-HH-mm-ss", TimeZone.getTimeZone("GMT+8:00"))
+}
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.wjh.zhilibaoprogject"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        android.applicationVariants.all { variant ->
+            variant.outputs.all {
+                //这里修改apk文件名
+                def appName = "${defaultConfig.applicationId}"
+                if (appName.contains("com.example.wjh")) {
+                    appName = appName.replaceAll("com.example.wjh.", "")
+                }
+                def fileName = appName + "_V${defaultConfig.versionName}_C${defaultConfig.versionCode}_${releaseTime()}_" + variant.name + ".apk"
+                outputFileName = fileName
+            }
+        }
+        lintOptions{
+            checkReleaseBuilds false
+            abortOnError false
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    api 'com.android.support:design:27.1.1'
+    //视图
+    api "me.imid.swipebacklayout.lib:library:1.1.0"
+    //recyclerview
+    api 'com.android.support:recyclerview-v7:27.1.1'
+    //retrofit2
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //可刷新recyclerview
+    api 'com.wuxiaolong.pullloadmorerecyclerview:library:1.0.4'
+
+    //cardView
+    api 'com.android.support:cardview-v7:27.1.1'
+    //加载图片
+    api 'com.squareup.picasso:picasso:2.5.2'
+
+    api 'com.github.crossoverone:StatusBarUtil:1.3.3'
+
+    //支付宝sdk
+    api files('libs/alipaySdk-20180601.jar')
+    //图片查看器
+    api 'com.github.Awent:PhotoPick-Master:v1.095'
+
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
+
+
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-16'
+
+    api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-16'//没有使用特殊Header，可以不加这行
+
+
+}
