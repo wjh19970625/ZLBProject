@@ -55,24 +55,18 @@ public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter {
         switch (state){
             case 0:
                 ((orderViewHolder)holder).mIsPaid.setText("交易完成");
-
                 break;
-
             case 1:
                 ((orderViewHolder)holder).mIsPaid.setText("未处理");
-
                 break;
-
             case 2:
                 ((orderViewHolder)holder).mIsPaid.setText("处理中");
                 break;
-
             case 3:
                 ((orderViewHolder)holder).mIsPaid.setText("待评价");
                 ((orderViewHolder)holder).mBtn.setVisibility(View.VISIBLE);
                 ((orderViewHolder)holder).mAssess.setVisibility(View.VISIBLE);
                 break;
-
             case 4:
                 ((orderViewHolder)holder).mIsPaid.setText("未支付");
                 ((orderViewHolder)holder).mBtn.setVisibility(View.VISIBLE);

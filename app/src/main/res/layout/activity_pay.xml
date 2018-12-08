@@ -17,7 +17,6 @@
             android:id="@+id/tell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
             android:text="联系电话:"/>
 
         <TextView
@@ -26,7 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layout_margin_mini"
             android:layout_toRightOf="@+id/tell"
-            android:textColor="@color/black"
             android:text="default"/>
 
         <TextView
@@ -34,21 +32,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:textColor="@color/black"
             android:text="default"/>
 
     </RelativeLayout>
-
-
 
     <LinearLayout
         android:id="@+id/ll_detail"
         android:layout_below="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
         android:paddingHorizontal="@dimen/layout_margin"
         android:paddingTop="@dimen/layout_margin_mini"
-        android:layout_marginTop="@dimen/layout_margin_mini"
         android:background="@color/white"
         android:orientation="horizontal">
 
@@ -70,7 +65,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_medium"
-                android:textColor="@color/black"
                 android:text="default"/>
 
             <TextView
@@ -80,30 +74,6 @@
                 android:layout_marginTop="@dimen/layout_margin_mini"
                 android:text="default"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/layout_margin_mini">
-
-                <TextView
-                    android:id="@+id/charge_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/layout_margin_mini"
-                    android:textSize="@dimen/text_size_medium"
-                    android:text="合计: ¥"/>
-
-                <TextView
-                    android:id="@+id/orderCharge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/text_size_medium"
-                    android:layout_toRightOf="@+id/charge_tv"
-                    android:textColor="@color/blue"
-                    android:text="0"/>
-
-            </RelativeLayout>
-
         </LinearLayout>
 
     </LinearLayout>
@@ -111,15 +81,42 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
-        android:padding="@dimen/layout_margin"
         android:layout_below="@+id/ll_detail"
         android:background="@color/white"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/layout_margin"
+            android:paddingHorizontal="@dimen/layout_margin">
+
+            <TextView
+                android:id="@+id/charge_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/layout_margin_mini"
+                android:text="合计:"/>
+
+            <TextView
+                android:id="@+id/orderCharge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="0"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray2"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/layout_margin"
+            android:paddingHorizontal="@dimen/layout_margin">
 
             <TextView
                 android:id="@+id/order"
@@ -135,10 +132,16 @@
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray2"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/layout_margin_mini">
+            android:paddingVertical="@dimen/layout_margin"
+            android:paddingHorizontal="@dimen/layout_margin">
 
             <TextView
                 android:id="@+id/time"

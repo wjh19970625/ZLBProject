@@ -2,7 +2,10 @@ package com.example.wjh.zhilibaoproject.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -16,6 +19,11 @@ import com.example.wjh.zhilibaoproject.network.base.JsonItem;
 import com.example.wjh.zhilibaoproject.network.callback.MsgCallBack;
 import com.example.wjh.zhilibaoproject.ui.activity.base.ActionBarActivity;
 import com.example.wjh.zhilibaoproject.ui.fragement.EducationModeFragment;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -29,9 +37,9 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
     private int state;
     private  int indexPage = 1;
     private RelativeLayout mNoData;
-    private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
-    private boolean refresh = false;
-    OrdersRecyclerViewAdapter adapter;
+    private RecyclerView mRecyclerView;
+    private OrdersRecyclerViewAdapter adapter;
+    private SmartRefreshLayout mRefresh;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,105 +77,61 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
                 break;
         }
         mNoData = (RelativeLayout) findViewById(R.id.no_data);
-        mPullLoadMoreRecyclerView = (PullLoadMoreRecyclerView) findViewById(R.id.pullLoadMoreRecyclerView);
-        mPullLoadMoreRecyclerView.setLinearLayout();
-    }
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv_mode_order);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRefresh = (SmartRefreshLayout) findViewById(R.id.refresh);
+        mRefresh.setRefreshHeader(new ClassicsHeader(this));
+        mRefresh.setRefreshFooter(new ClassicsFooter(this));
+        mRefresh.setEnableRefresh(true);
 
-    @Override
-    public void initData() {
-        super.initData();
-        refresh = true;
-        switch (state){
-            case 0:
-                getOneOrders(0,indexPage);
-                break;
-            case 1:
-                getOneOrders(1,indexPage);
-                break;
-            case 2:
-                getOneOrders(2,indexPage);
-                break;
-            case 3:
-                getOneOrders(3,indexPage);
-                break;
-            case 4:
-                getOneOrders(4,indexPage);
-                break;
-            case 9:
-                getAllOrders(indexPage);
-                break;
-        }
-    }
-
-    @Override
-    public void init() {
-        super.init();
-        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
+        mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
-            public void onRefresh() {
-                //初始化页数
-                indexPage = 1;
-                switch (state){
-                    case 0:
-                        getOneOrders(0,indexPage);
-                        break;
-                    case 1:
-                        getOneOrders(1,indexPage);
-                        break;
-                    case 2:
-                        getOneOrders(2,indexPage);
-                        break;
-                    case 3:
-                        getOneOrders(3,indexPage);
-                        break;
-                    case 4:
-                        getOneOrders(4,indexPage);
-                        break;
-                    case 9:
-                        getAllOrders(indexPage);
-                        break;
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                indexPage++;
+                if (state == 9){
+                    getAllOrders(indexPage);
+                } else {
+                    getOneOrders(indexPage);
                 }
             }
 
             @Override
-            public void onLoadMore() {
-                indexPage = indexPage + 1;
-                refresh = false;
-                switch (state){
-                    case 0:
-                        getOneOrders(0,indexPage);
-                        break;
-                    case 1:
-                        getOneOrders(1,indexPage);
-                        break;
-                    case 2:
-                        getOneOrders(2,indexPage);
-                        break;
-                    case 3:
-                        getOneOrders(3,indexPage);
-                        break;
-                    case 4:
-                        getOneOrders(4,indexPage);
-                        break;
-                    case 9:
-                        getAllOrders(indexPage);
-                        break;
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                //初始化页数
+                indexPage = 1;
+                mRefresh.setEnableLoadMore(true);
+                if (state == 9){
+                    getAllOrders(indexPage);
+                } else {
+                    getOneOrders(indexPage);
                 }
             }
         });
     }
 
-    private void getOneOrders(int state, final int indexPage){
+    @Override
+    public void initData() {
+        super.initData();
+        if (state == 9){
+            getAllOrders(indexPage);
+        } else {
+            getOneOrders(indexPage);
+        }
+    }
+
+    private void getOneOrders(final int indexPage){
         IOrder orderObj = RetrofitHelper.create(IOrder.class);
         orderObj.getMyOneOrders(RetrofitHelper.getBody(new JsonItem("orderState",state),new JsonItem("indexPage",indexPage)))
                 .enqueue(new MsgCallBack<GetOneOrdersBean>(OrderModeActivity.this,true) {
                     @Override
                     public void onErrored(Call<GetOneOrdersBean> call, Throwable t) {
-
+                        mRefresh.finishRefresh();
+                        mRefresh.finishLoadMore();
                     }
-
                     @Override
                     public void onSuccessed(Call<GetOneOrdersBean> call, Response<GetOneOrdersBean> response) {
+                        mRefresh.finishRefresh();
+                        mRefresh.finishLoadMore();
                         GetOneOrdersBean.Data[] data = response.body().getData();
                         List<GetOneOrdersBean.Data> list = new ArrayList<GetOneOrdersBean.Data>();
                         for (int i = 0;i < data.length;i++){
@@ -177,52 +141,67 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
                         //当访问页为第一页 且list长度为0时
                         if (indexPage == 1 && list.size() == 0){
                             mNoData.setVisibility(View.VISIBLE);
-                            mPullLoadMoreRecyclerView.setVisibility(View.GONE);
+                            mRefresh.setVisibility(View.GONE);
                         }else {
-                            if (refresh){
+                            mNoData.setVisibility(View.GONE);
+                            mRefresh.setVisibility(View.VISIBLE);
+                            if (indexPage > 1){
+                                if (list.size() == 0){
+                                    mRefresh.setEnableLoadMore(false);
+                                } else {
+                                    adapter.setData(list);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }else {
                                 adapter = new OrdersRecyclerViewAdapter(list,OrderModeActivity.this);
                                 adapter.setOnSectionClick(OrderModeActivity.this);
-                                mPullLoadMoreRecyclerView.setAdapter(adapter);
-                            }else {
-                                adapter.setData(list);
-                                adapter.notifyDataSetChanged();
                             }
 
-                            //每次执行完加载或者刷新 关闭
-                            mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
                         }
                     }
                 });
     }
 
-    private void getAllOrders(int indexPage){
+    private void getAllOrders(final int indexPage){
         IOrder orderObj = RetrofitHelper.create(IOrder.class);
         orderObj.getMyAllOrders(RetrofitHelper.getBody(new JsonItem("indexPage",indexPage)))
                 .enqueue(new MsgCallBack<GetOneOrdersBean>(OrderModeActivity.this,true) {
                     @Override
                     public void onErrored(Call<GetOneOrdersBean> call, Throwable t) {
-
+                        mRefresh.finishRefresh();
+                        mRefresh.finishLoadMore();
                     }
 
                     @Override
                     public void onSuccessed(Call<GetOneOrdersBean> call, Response<GetOneOrdersBean> response) {
+                        mRefresh.finishRefresh();
+                        mRefresh.finishLoadMore();
                         GetOneOrdersBean.Data[] data = response.body().getData();
                         Log.e(TAG,"------------>length"+data.length);
                         List<GetOneOrdersBean.Data> list = new ArrayList<GetOneOrdersBean.Data>();
                         for (int i = 0;i < data.length;i++){
                             list.add(data[i]);
                         }
-                        if (refresh){
-                            adapter = new OrdersRecyclerViewAdapter(list,OrderModeActivity.this);
-                            adapter.setOnSectionClick(OrderModeActivity.this);
-                            mPullLoadMoreRecyclerView.setAdapter(adapter);
+                        //当访问页为第一页 且list长度为0时
+                        if (indexPage == 1 && list.size() == 0){
+                            mNoData.setVisibility(View.VISIBLE);
+                            mRefresh.setVisibility(View.GONE);
                         }else {
-                            adapter.setData(list);
-                            adapter.notifyDataSetChanged();
+                            mNoData.setVisibility(View.GONE);
+                            mRefresh.setVisibility(View.VISIBLE);
+                            if (indexPage > 1){
+                                if (list.size() == 0){
+                                    mRefresh.setEnableLoadMore(false);
+                                }else {
+                                    adapter.setData(list);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }else {
+                                adapter = new OrdersRecyclerViewAdapter(list,OrderModeActivity.this);
+                                adapter.setOnSectionClick(OrderModeActivity.this);
+                                mRecyclerView.setAdapter(adapter);
+                            }
                         }
-
-                        //每次执行完加载或者刷新 关闭
-                        mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
 
                     }
                 });

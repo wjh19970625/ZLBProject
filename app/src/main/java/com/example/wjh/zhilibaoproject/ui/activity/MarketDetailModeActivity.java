@@ -112,8 +112,6 @@ public class MarketDetailModeActivity extends WidgetActivity {
                     new PhotoPagerConfig.Builder(MarketDetailModeActivity.this)
                             .setBigImageUrls(list)
                             .setSavaImage(true)
-//                        .setPosition(2)
-//                        .setSaveImageLocalPath("这里是你想保存的图片地址")
                             .build();
                 }
             }

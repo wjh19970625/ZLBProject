@@ -81,7 +81,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
     @Override
     public void initView() {
         super.initView();
-        setCenterTitle("个人资料");
+        setCenterTitle("修改资料");
         mNickName = (TextView) findViewById(R.id.nickname);
         mSex = (TextView) findViewById(R.id.sex);
         mBirthday = (TextView) findViewById(R.id.birthday);
@@ -277,6 +277,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                         if (status ==0){
                             showToast("更新成功");
                             setResult(RESULT_OK);
+                            finish();
                         }else {
                             showToast("更新失败");
                         }

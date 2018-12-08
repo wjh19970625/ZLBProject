@@ -94,6 +94,7 @@ public class PayActivity extends ActionBarActivity {
     @Override
     public void initView() {
         super.initView();
+        setCenterTitle("确认支付");
         mPhoneNumber = (TextView) findViewById(R.id.phoneNumber);
         mTrueName = (TextView) findViewById(R.id.trueName);
         mOrderName = (TextView) findViewById(R.id.orderName);
@@ -139,7 +140,7 @@ public class PayActivity extends ActionBarActivity {
 
                             mOrderName.setText(orderName);
                             mOrderDescription.setText(orderDescription);
-                            mOrderCharge.setText(orderCharge);
+                            mOrderCharge.setText("¥"+orderCharge);
                             mPayTime.setText(payTime);
                             mOrderId.setText(orderId);
                             mPhoneNumber.setText(phoneNum);

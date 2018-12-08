@@ -65,6 +65,7 @@ public class PersonalDataActivity extends ActionBarActivity {
     @Override
     public void initView() {
         super.initView();
+        setCenterTitle("个人中心");
         mNickname = (TextView) findViewById(R.id.nickname);
         mRole = (TextView) findViewById(R.id.role);
         mAddress = (TextView) findViewById(R.id.address);
@@ -147,8 +148,9 @@ public class PersonalDataActivity extends ActionBarActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case TO_UPDATE:
-                if (requestCode ==RESULT_OK){
+                if (resultCode == RESULT_OK){
                     getUserData();
+                    Log.e(TAG,"数据刷新");
                 }
                 break;
         }

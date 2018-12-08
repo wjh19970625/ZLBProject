@@ -87,7 +87,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -125,10 +124,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     protected void initData() {
         super.initData();
-        String token = UserInfoHelper.getInstance().getToken();
-        if (token != null && !token.equals("")){
-            autoLogin();
-        }
+
         list = new ArrayList<>();
         String DataTitle[] = new String[]{"未支付","未处理","处理中","待评价","已完成"};
         Integer DataImg[] = new Integer[]{R.drawable.order_process,R.drawable.order_process,R.drawable.order_process,R.drawable.order_assess,R.drawable.order_finsh};
@@ -175,6 +171,22 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
         mOrderRv.setAdapter(adapter);
         mOrderRv.setLayoutManager(new GridLayoutManager(getContext(),3, GridLayoutManager.VERTICAL,false));
     }
+
+    //懒加载
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        Log.e(TAG, " setUserVisibleHint() --> isVisibleToUser = " + isVisibleToUser);
+
+        if (isVisibleToUser) {
+            String token = UserInfoHelper.getInstance().getToken();
+            if (token != null && !token.equals("")){
+                autoLogin();
+            }
+        }
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
 
     @Override
     public void onClick(View view) {

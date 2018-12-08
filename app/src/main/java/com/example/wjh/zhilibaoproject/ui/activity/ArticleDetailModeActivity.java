@@ -3,6 +3,7 @@ package com.example.wjh.zhilibaoproject.ui.activity;
 import android.content.Intent;
 import android.text.Html;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.example.wjh.zhilibaoproject.R;
@@ -21,8 +22,8 @@ public class ArticleDetailModeActivity extends ActionBarActivity {
     private final static String TAG = ArticleDetailModeActivity.class.getSimpleName();
     private TextView mTitle;
     private TextView mTime;
-    private TextView mContent;
     private String title;
+    private WebView mWebView;
 
     @Override
     protected int getContentLayoutId() {
@@ -35,7 +36,7 @@ public class ArticleDetailModeActivity extends ActionBarActivity {
         setCenterTitle("文章详情");
         mTitle = (TextView) findViewById(R.id.title);
         mTime = (TextView) findViewById(R.id.update_time);
-        mContent = (TextView) findViewById(R.id.content);
+        mWebView = (WebView) findViewById(R.id.webView);
     }
 
     @Override
@@ -62,7 +63,7 @@ public class ArticleDetailModeActivity extends ActionBarActivity {
 
                                 mTitle.setText(title);
                                 mTime.setText(timeStr);
-                                mContent.setText(Html.fromHtml(content));
+                                mWebView.loadData(content,"text/html; charset=utf-8", "utf-8");
 
                                 Log.e(TAG,"content------------>"+content);
                             }else {

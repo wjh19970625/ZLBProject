@@ -2,6 +2,7 @@ package com.example.wjh.zhilibaoproject.ui.fragement;
 
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +51,7 @@ public class IndexFragment extends BaseFragment{
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
-                initData();
+                getData();
             }
         });
 
@@ -64,12 +65,12 @@ public class IndexFragment extends BaseFragment{
             }
         });
         mProductRv.setAdapter(adapter);
-        mProductRv.setLayoutManager(new GridLayoutManager(getContext(),1, GridLayoutManager.VERTICAL,false));
+        mProductRv.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        mRefresh.autoRefresh();
     }
 
-    @Override
-    protected void initData() {
-        super.initData();
+    private void getData(){
         IProduct productObj  = RetrofitHelper.create(IProduct.class);
         productObj.getProductList()
                 .enqueue(new MsgCallBack<ProductListBean>(getContext()) {

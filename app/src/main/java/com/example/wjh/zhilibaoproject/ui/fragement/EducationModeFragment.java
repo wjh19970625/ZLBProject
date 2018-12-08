@@ -1,6 +1,9 @@
 package com.example.wjh.zhilibaoproject.ui.fragement;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
@@ -13,6 +16,10 @@ import com.example.wjh.zhilibaoproject.network.base.JsonItem;
 import com.example.wjh.zhilibaoproject.network.callback.MsgCallBack;
 import com.example.wjh.zhilibaoproject.ui.activity.ArticleDetailModeActivity;
 import com.example.wjh.zhilibaoproject.ui.fragement.base.BaseFragment;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import java.util.ArrayList;
@@ -24,8 +31,9 @@ import retrofit2.Response;
 public class EducationModeFragment extends BaseFragment implements TitleRecyclerViewAdapter.OnSectionClick {
     private final static String TAG = EducationModeFragment.class.getSimpleName();
     private String mCategory;
-    private PullLoadMoreRecyclerView mPullLoadMoreRecyclerView;
+    private RecyclerView mRecyclerView;
     private TitleRecyclerViewAdapter mAdapter;
+    private SmartRefreshLayout mRefresh;
 
     @Override
     protected int getLayoutId() {
@@ -35,48 +43,39 @@ public class EducationModeFragment extends BaseFragment implements TitleRecycler
     @Override
     protected void initView(View view) {
         super.initView(view);
-        mPullLoadMoreRecyclerView =  view.findViewById(R.id.pullLoadMoreRecyclerView);
-        mPullLoadMoreRecyclerView.setLinearLayout();
+        mRecyclerView =  view.findViewById(R.id.rv_education);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRefresh = view.findViewById(R.id.refresh);
+        mRefresh.setRefreshHeader(new ClassicsHeader(getContext()));
+        mRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                getData();
+            }
+        });
     }
 
     @Override
     protected void initData() {
         super.initData();
         mCategory = getArguments().getString("category",null);
-        getData();
-    }
-
-    @Override
-    protected void init() {
-        super.init();
-        mPullLoadMoreRecyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
-            @Override
-            public void onRefresh() {
-                getData();
-            }
-
-            @Override
-            public void onLoadMore() {
-                //等后台更新接口
-                mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
-            }
-        });
+        mRefresh.autoRefresh();
     }
 
     private void getData(){
         if (mCategory != null){
-
             Log.e(TAG,"category----------------------------->"+mCategory);
             IArticle articleObj = RetrofitHelper.create(IArticle.class);
             articleObj.getCategoryArticle(RetrofitHelper.getBody(new JsonItem("category",mCategory)))
                     .enqueue(new MsgCallBack<ArticleTitleBean>(getContext()) {
                         @Override
                         public void onErrored(Call<ArticleTitleBean> call, Throwable t) {
-
+                            mRefresh.finishRefresh();
                         }
 
                         @Override
                         public void onSuccessed(Call<ArticleTitleBean> call, Response<ArticleTitleBean> response) {
+                            mRefresh.finishRefresh();
                             int status = response.body().getStatus();
                             Log.e(TAG,"status-------------------->"+status);
                             List<ArticleTitleBean.Data> list = new ArrayList<ArticleTitleBean.Data>();
@@ -89,9 +88,7 @@ public class EducationModeFragment extends BaseFragment implements TitleRecycler
 
                             mAdapter = new TitleRecyclerViewAdapter(list,getContext());
                             mAdapter.setOnSectionClick(EducationModeFragment.this);
-                            mPullLoadMoreRecyclerView.setAdapter(mAdapter);
-                            //每次执行完加载或者刷新 关闭
-                            mPullLoadMoreRecyclerView.setPullLoadMoreCompleted();
+                            mRecyclerView.setAdapter(mAdapter);
                         }
                     });
         }

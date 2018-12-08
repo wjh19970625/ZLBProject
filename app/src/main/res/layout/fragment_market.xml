@@ -21,11 +21,20 @@
             android:textStyle="bold"
             android:text="创意集市"/>
 
-        <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-            android:id="@+id/pullLoadMoreRecyclerView"
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/title"/>
+            android:layout_below="@+id/title">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_market"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+
 
     </RelativeLayout>
 
