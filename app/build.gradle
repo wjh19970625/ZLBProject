@@ -53,8 +53,6 @@ dependencies {
     //retrofit2
     api 'com.squareup.retrofit2:retrofit:2.3.0'
     api 'com.squareup.retrofit2:converter-gson:2.3.0'
-    //可刷新recyclerview
-    api 'com.wuxiaolong.pullloadmorerecyclerview:library:1.0.4'
 
     //cardView
     api 'com.android.support:cardview-v7:27.1.1'
