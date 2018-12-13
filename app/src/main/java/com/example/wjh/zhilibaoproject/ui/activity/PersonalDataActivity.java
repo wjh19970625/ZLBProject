@@ -162,12 +162,12 @@ public class PersonalDataActivity extends ActionBarActivity {
         userObj.getUserInfo()
                 .enqueue(new MsgCallBack<UserInfBean>(PersonalDataActivity.this,true) {
                     @Override
-                    public void onErrored(Call<UserInfBean> call, Throwable t) {
+                    public void onFailed(Call<UserInfBean> call, Throwable t) {
 
                     }
 
                     @Override
-                    public void onSuccessed(Call<UserInfBean> call, Response<UserInfBean> response) {
+                    public void onSucceed(Call<UserInfBean> call, Response<UserInfBean> response) {
                         int status = response.body().getStatus();
                         Log.e(TAG,"获取个人资料--------------------->"+status);
                         if (status ==0){

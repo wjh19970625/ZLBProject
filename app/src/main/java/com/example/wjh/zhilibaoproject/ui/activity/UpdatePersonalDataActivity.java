@@ -240,12 +240,12 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                     IUser userObj = RetrofitHelper.create(IUser.class);
                     userObj.upload(RetrofitHelper.getBody(file)).enqueue(new MsgCallBack<CallBackBaseBean>(this) {
                         @Override
-                        public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                        public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                         }
 
                         @Override
-                        public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                        public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                             int status = response.body().getStatus();
                             if (status == 0){
                                 Picasso.with(UpdatePersonalDataActivity.this).load(response.body().getMsg()).into(mUserImage);
@@ -267,12 +267,12 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                 ,new JsonItem("image",null)))
                 .enqueue(new MsgCallBack<CallBackBaseBean>(UpdatePersonalDataActivity.this,true) {
                     @Override
-                    public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                    public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                     }
 
                     @Override
-                    public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                    public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                         int status = response.body().getStatus();
                         if (status ==0){
                             showToast("更新成功");

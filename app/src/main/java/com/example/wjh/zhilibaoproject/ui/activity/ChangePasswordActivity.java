@@ -51,12 +51,12 @@ public class ChangePasswordActivity extends ActionBarActivity {
                         userObj.changePassword(RetrofitHelper.getBody(new JsonItem("oldPassword",oldPassword),new JsonItem("newPassword",newPassword)))
                                 .enqueue(new MsgCallBack<CallBackBaseBean>(ChangePasswordActivity.this,true) {
                                     @Override
-                                    public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                    public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                     }
 
                                     @Override
-                                    public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                    public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                         int status = response.body().getStatus();
                                         String msg = response.body().getMsg();
                                         showToast(msg);

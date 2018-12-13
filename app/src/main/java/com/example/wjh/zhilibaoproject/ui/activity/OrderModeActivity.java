@@ -124,12 +124,12 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
         orderObj.getMyOneOrders(RetrofitHelper.getBody(new JsonItem("orderState",state),new JsonItem("indexPage",indexPage)))
                 .enqueue(new MsgCallBack<GetOneOrdersBean>(OrderModeActivity.this,true) {
                     @Override
-                    public void onErrored(Call<GetOneOrdersBean> call, Throwable t) {
+                    public void onFailed(Call<GetOneOrdersBean> call, Throwable t) {
                         mRefresh.finishRefresh();
                         mRefresh.finishLoadMore();
                     }
                     @Override
-                    public void onSuccessed(Call<GetOneOrdersBean> call, Response<GetOneOrdersBean> response) {
+                    public void onSucceed(Call<GetOneOrdersBean> call, Response<GetOneOrdersBean> response) {
                         mRefresh.finishRefresh();
                         mRefresh.finishLoadMore();
                         GetOneOrdersBean.Data[] data = response.body().getData();
@@ -167,13 +167,13 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
         orderObj.getMyAllOrders(RetrofitHelper.getBody(new JsonItem("indexPage",indexPage)))
                 .enqueue(new MsgCallBack<GetOneOrdersBean>(OrderModeActivity.this,true) {
                     @Override
-                    public void onErrored(Call<GetOneOrdersBean> call, Throwable t) {
+                    public void onFailed(Call<GetOneOrdersBean> call, Throwable t) {
                         mRefresh.finishRefresh();
                         mRefresh.finishLoadMore();
                     }
 
                     @Override
-                    public void onSuccessed(Call<GetOneOrdersBean> call, Response<GetOneOrdersBean> response) {
+                    public void onSucceed(Call<GetOneOrdersBean> call, Response<GetOneOrdersBean> response) {
                         mRefresh.finishRefresh();
                         mRefresh.finishLoadMore();
                         GetOneOrdersBean.Data[] data = response.body().getData();

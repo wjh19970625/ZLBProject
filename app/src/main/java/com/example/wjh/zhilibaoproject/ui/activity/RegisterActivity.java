@@ -90,12 +90,12 @@ public class RegisterActivity extends ActionBarActivity {
                         userObj.sendCheckCode(RetrofitHelper.getBody(new JsonItem("phoneNumber",phoneNumber)))
                                 .enqueue(new MsgCallBack<CallBackBaseBean>(RegisterActivity.this,true) {
                                     @Override
-                                    public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                    public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                     }
 
                                     @Override
-                                    public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                    public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                         String msg = response.body().getMsg();
                                         showToast(msg);
                                     }
@@ -127,12 +127,12 @@ public class RegisterActivity extends ActionBarActivity {
                                         user.checkNickname(RetrofitHelper.getBody(new JsonItem("nickname",nickname)))
                                                 .enqueue(new MsgCallBack<CallBackBaseBean>(RegisterActivity.this) {
                                                     @Override
-                                                    public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                                    public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                                     }
 
                                                     @Override
-                                                    public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                                    public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                                         int status = response.body().getStatus();
                                                         if (status == 0){
                                                             IUser userObj = RetrofitHelper.create(IUser.class);
@@ -140,12 +140,12 @@ public class RegisterActivity extends ActionBarActivity {
                                                                     ,new JsonItem("phoneNumber",phoneNumber),new JsonItem("verificationCode",verificationCode)))
                                                                     .enqueue(new MsgCallBack<CallBackBaseBean>(RegisterActivity.this,true) {
                                                                         @Override
-                                                                        public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                                                        public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                                                         }
 
                                                                         @Override
-                                                                        public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                                                        public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                                                             int status = response.body().getStatus();
                                                                             if (status == 0){
                                                                                 showToast("注册成功");

@@ -80,12 +80,12 @@ public class AuthenticationActivity extends ActionBarActivity {
         userObj.checkIdentity(RetrofitHelper.getBody(new JsonItem("name",trueName),new JsonItem("cnId",idCard)))
                 .enqueue(new MsgCallBack<CallBackBaseBean>(AuthenticationActivity.this,true) {
                     @Override
-                    public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                    public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                     }
 
                     @Override
-                    public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                    public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                         int status = response.body().getStatus();
                         String msg = response.body().getMsg();
                         if (status == 0){

@@ -343,12 +343,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
         userObj.getUserInfo()
                 .enqueue(new MsgCallBack<UserInfBean>(getContext()) {
                     @Override
-                    public void onErrored(Call<UserInfBean> call, Throwable t) {
+                    public void onFailed(Call<UserInfBean> call, Throwable t) {
 
                     }
 
                     @Override
-                    public void onSuccessed(Call<UserInfBean> call, Response<UserInfBean> response) {
+                    public void onSucceed(Call<UserInfBean> call, Response<UserInfBean> response) {
                         int status = response.body().getStatus();
                         Log.e(TAG,"获取个人资料--------------------->"+status);
                         if (status == 0){
@@ -414,12 +414,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
             userObj.login(RetrofitHelper.getBody(new JsonItem("nickname",nickname),new JsonItem("password",password)))
                     .enqueue(new MsgCallBack<LoginBean>(getContext()) {
                         @Override
-                        public void onErrored(Call<LoginBean> call, Throwable t) {
+                        public void onFailed(Call<LoginBean> call, Throwable t) {
 
                         }
 
                         @Override
-                        public void onSuccessed(Call<LoginBean> call, Response<LoginBean> response) {
+                        public void onSucceed(Call<LoginBean> call, Response<LoginBean> response) {
                             int status = response.body().getStatus();
                             if (status == 0){
                                 Log.e(TAG,"----------------------------->自动登录成功");

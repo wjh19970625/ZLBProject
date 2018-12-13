@@ -75,12 +75,12 @@ public class IndexFragment extends BaseFragment{
         productObj.getProductList()
                 .enqueue(new MsgCallBack<ProductListBean>(getContext()) {
                     @Override
-                    public void onErrored(Call<ProductListBean> call, Throwable t) {
+                    public void onFailed(Call<ProductListBean> call, Throwable t) {
                         mRefresh.finishRefresh();
                     }
 
                     @Override
-                    public void onSuccessed(Call<ProductListBean> call, Response<ProductListBean> response) {
+                    public void onSucceed(Call<ProductListBean> call, Response<ProductListBean> response) {
                         mRefresh.finishRefresh();
                         ProductListBean.Data[] data = response.body().getData();
                         Log.e(TAG,"data.length--------------------------->"+data.length);

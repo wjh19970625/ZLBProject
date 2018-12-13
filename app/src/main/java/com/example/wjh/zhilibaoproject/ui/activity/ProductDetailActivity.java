@@ -142,12 +142,12 @@ public class ProductDetailActivity extends WidgetActivity {
         productObj.getProductInfo(RetrofitHelper.getBody(new JsonItem("pid", pid)))
                 .enqueue(new MsgCallBack<ProductDetailBean>(ProductDetailActivity.this, true) {
                     @Override
-                    public void onErrored(Call<ProductDetailBean> call, Throwable t) {
+                    public void onFailed(Call<ProductDetailBean> call, Throwable t) {
 
                     }
 
                     @Override
-                    public void onSuccessed(Call<ProductDetailBean> call, Response<ProductDetailBean> response) {
+                    public void onSucceed(Call<ProductDetailBean> call, Response<ProductDetailBean> response) {
                         if (response.body().getData() == null ){
                             showToast("获取数据失败");
                             return;

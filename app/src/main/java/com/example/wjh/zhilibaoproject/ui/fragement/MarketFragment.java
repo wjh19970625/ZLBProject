@@ -63,12 +63,12 @@ public class MarketFragment extends BaseFragment implements MarketAdapter.OnSect
         marketObj.getMarketList()
                 .enqueue(new MsgCallBack<MarketListBean>(getContext()) {
                     @Override
-                    public void onErrored(Call<MarketListBean> call, Throwable t) {
+                    public void onFailed(Call<MarketListBean> call, Throwable t) {
                         mRefresh.finishRefresh();
                     }
 
                     @Override
-                    public void onSuccessed(Call<MarketListBean> call, Response<MarketListBean> response) {
+                    public void onSucceed(Call<MarketListBean> call, Response<MarketListBean> response) {
                         mRefresh.finishRefresh();
                         MarketListBean.Data[] data = response.body().getData();
                         List<MarketListBean.Data> list = new ArrayList<>();

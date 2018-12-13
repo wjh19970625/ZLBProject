@@ -32,16 +32,16 @@ public  abstract class MsgCallBack<T> extends BaseCallBack<T> {
     protected void onError(Call<T> call, Throwable t) {
         ((BaseActivity)context).showToast(t.getMessage());
         ((BaseActivity)context).closedProgressDialog();
-        onErrored(call,t);
+        onFailed(call,t);
     }
 
     @Override
     public void onSuccess(Call<T> call, Response<T> response) {
         ((BaseActivity)context).closedProgressDialog();
-        onSuccessed(call,response);
+        onSucceed(call,response);
     }
 
-    public abstract void onErrored(Call<T> call, Throwable t);
-    public abstract void onSuccessed(Call<T> call,Response<T> response);
+    public abstract void onFailed(Call<T> call, Throwable t);
+    public abstract void onSucceed(Call<T> call,Response<T> response);
 
 }

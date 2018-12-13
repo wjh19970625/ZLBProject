@@ -63,12 +63,12 @@ public class MarketDetailModeActivity extends WidgetActivity {
             marketOnj.getIdeaDetails(RetrofitHelper.getBody(new JsonItem("mid",mid)))
                     .enqueue(new MsgCallBack<MarketDetailBean>(MarketDetailModeActivity.this,true) {
                         @Override
-                        public void onErrored(Call<MarketDetailBean> call, Throwable t) {
+                        public void onFailed(Call<MarketDetailBean> call, Throwable t) {
 
                         }
 
                         @Override
-                        public void onSuccessed(Call<MarketDetailBean> call, Response<MarketDetailBean> response) {
+                        public void onSucceed(Call<MarketDetailBean> call, Response<MarketDetailBean> response) {
                             MarketDetailBean.Data data = response.body().getData();
 
                             if (data != null){

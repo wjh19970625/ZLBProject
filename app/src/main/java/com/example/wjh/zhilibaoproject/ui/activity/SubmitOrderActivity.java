@@ -90,12 +90,12 @@ public class SubmitOrderActivity extends ActionBarActivity {
                 orderObj.createOrder(RetrofitHelper.getBody(new JsonItem("orderName",name),new JsonItem("orderDescription",description),new JsonItem("orderCharge",sum)))
                         .enqueue(new MsgCallBack<CreateOrdersBean>(SubmitOrderActivity.this,true) {
                             @Override
-                            public void onErrored(Call<CreateOrdersBean> call, Throwable t) {
+                            public void onFailed(Call<CreateOrdersBean> call, Throwable t) {
 
                             }
 
                             @Override
-                            public void onSuccessed(Call<CreateOrdersBean> call, Response<CreateOrdersBean> response) {
+                            public void onSucceed(Call<CreateOrdersBean> call, Response<CreateOrdersBean> response) {
                                 if (response.body().getData() == null){
                                     showToast("登录失效请重新登录");
                                     //清空数据

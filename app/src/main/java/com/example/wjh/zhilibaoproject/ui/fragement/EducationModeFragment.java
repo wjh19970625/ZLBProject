@@ -69,12 +69,12 @@ public class EducationModeFragment extends BaseFragment implements TitleRecycler
             articleObj.getCategoryArticle(RetrofitHelper.getBody(new JsonItem("category",mCategory)))
                     .enqueue(new MsgCallBack<ArticleTitleBean>(getContext()) {
                         @Override
-                        public void onErrored(Call<ArticleTitleBean> call, Throwable t) {
+                        public void onFailed(Call<ArticleTitleBean> call, Throwable t) {
                             mRefresh.finishRefresh();
                         }
 
                         @Override
-                        public void onSuccessed(Call<ArticleTitleBean> call, Response<ArticleTitleBean> response) {
+                        public void onSucceed(Call<ArticleTitleBean> call, Response<ArticleTitleBean> response) {
                             mRefresh.finishRefresh();
                             int status = response.body().getStatus();
                             Log.e(TAG,"status-------------------->"+status);

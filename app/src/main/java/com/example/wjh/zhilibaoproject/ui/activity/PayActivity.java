@@ -121,12 +121,12 @@ public class PayActivity extends ActionBarActivity {
             orderObj.getOrderDetails(RetrofitHelper.getBody(new JsonItem("orderId",orderId)))
                     .enqueue(new MsgCallBack<GetOrderDetailBean>(PayActivity.this,true) {
                         @Override
-                        public void onErrored(Call<GetOrderDetailBean> call, Throwable t) {
+                        public void onFailed(Call<GetOrderDetailBean> call, Throwable t) {
 
                         }
 
                         @Override
-                        public void onSuccessed(Call<GetOrderDetailBean> call, Response<GetOrderDetailBean> response) {
+                        public void onSucceed(Call<GetOrderDetailBean> call, Response<GetOrderDetailBean> response) {
                             if (response.body() == null){
                                 return;
                             }
@@ -170,12 +170,12 @@ public class PayActivity extends ActionBarActivity {
                     productObj.pay(RetrofitHelper.getBody(new JsonItem("orderId",orderId)))
                             .enqueue(new MsgCallBack<CallBackBaseBean>(PayActivity.this,true) {
                                 @Override
-                                public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                 }
 
                                 @Override
-                                public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                     int status = response.body().getStatus();
                                     String msg = response.body().getMsg();
                                     if (status == 0){

@@ -29,7 +29,7 @@ public class MainActivity extends WidgetActivity {
     private NoScrollViewPager mAty_main_vp;
     private RadioGroup mItem_rg;
     private List<Fragment> list;
-//    private static final int REQUEST_WRITE_EXTERNAL_STORAGE = 10000;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

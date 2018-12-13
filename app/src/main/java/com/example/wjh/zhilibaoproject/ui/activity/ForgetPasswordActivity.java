@@ -92,12 +92,12 @@ public class ForgetPasswordActivity extends ActionBarActivity {
                             userObj.forgetPasswordSendSMS(RetrofitHelper.getBody(new JsonItem("nickname",nickname),new JsonItem("phoneNumber",phoneNumber)))
                                     .enqueue(new MsgCallBack<CallBackBaseBean>(ForgetPasswordActivity.this,true) {
                                         @Override
-                                        public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                        public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                         }
 
                                         @Override
-                                        public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                        public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                             String msg = response.body().getMsg();
                                             showToast(msg);
                                         }
@@ -134,12 +134,12 @@ public class ForgetPasswordActivity extends ActionBarActivity {
                                                 ,new JsonItem("phoneNumber",phoneNumber),new JsonItem("code",code)))
                                                 .enqueue(new MsgCallBack<CallBackBaseBean>(ForgetPasswordActivity.this,true) {
                                                     @Override
-                                                    public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                                    public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                                     }
 
                                                     @Override
-                                                    public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                                    public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                                         int status = response.body().getStatus();
                                                         String msg = response.body().getMsg();
                                                         if (status == 0){

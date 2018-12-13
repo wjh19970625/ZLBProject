@@ -71,12 +71,12 @@ public class LoginActivity extends ActionBarActivity {
                     userObj.login(RetrofitHelper.getBody(new JsonItem("nickname",nickname),new JsonItem("password",password)))
                             .enqueue(new MsgCallBack<LoginBean>(LoginActivity.this) {
                                 @Override
-                                public void onErrored(Call<LoginBean> call, Throwable t) {
+                                public void onFailed(Call<LoginBean> call, Throwable t) {
 
                                 }
 
                                 @Override
-                                public void onSuccessed(Call<LoginBean> call, Response<LoginBean> response) {
+                                public void onSucceed(Call<LoginBean> call, Response<LoginBean> response) {
                                     int status = response.body().getStatus();
                                     if (status == 0){
                                         showToast("登录成功");

@@ -46,12 +46,12 @@ public class FeedBackActivity extends ActionBarActivity {
                     indexObj.suggest(RetrofitHelper.getBody(new JsonItem("suggest",suggest)))
                             .enqueue(new MsgCallBack<CallBackBaseBean>(FeedBackActivity.this,true) {
                                 @Override
-                                public void onErrored(Call<CallBackBaseBean> call, Throwable t) {
+                                public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
                                 }
 
                                 @Override
-                                public void onSuccessed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
                                     int status = response.body().getStatus();
                                     if (status == 0){
                                         showToast("反馈成功");

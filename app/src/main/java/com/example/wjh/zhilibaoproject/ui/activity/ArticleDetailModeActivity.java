@@ -49,12 +49,12 @@ public class ArticleDetailModeActivity extends ActionBarActivity {
             article.getArticleDetails(RetrofitHelper.getBody(new JsonItem("title",title)))
                     .enqueue(new MsgCallBack<ArticleDetailBean>(ArticleDetailModeActivity.this,true) {
                         @Override
-                        public void onErrored(Call<ArticleDetailBean> call, Throwable t) {
+                        public void onFailed(Call<ArticleDetailBean> call, Throwable t) {
 
                         }
 
                         @Override
-                        public void onSuccessed(Call<ArticleDetailBean> call, Response<ArticleDetailBean> response) {
+                        public void onSucceed(Call<ArticleDetailBean> call, Response<ArticleDetailBean> response) {
                             int status = response.body().getStatus();
                             if (status == 0){
                                 String content = response.body().getData().getContent();
