@@ -1,124 +1,91 @@
 package com.example.wjh.zhilibaoproject.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.wjh.zhilibaoproject.R;
 import com.example.wjh.zhilibaoproject.bean.GetOneOrdersBean;
+import com.example.wjh.zhilibaoproject.ui.activity.PayActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import static com.example.wjh.zhilibaoproject.common.Config.SERVICE_URL;
 
-public class OrdersRecyclerViewAdapter extends RecyclerView.Adapter {
-    private List<GetOneOrdersBean.Data> list;
+public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean.Data, BaseViewHolder> {
+    private int mState;
     private Context context;
-    private OnSectionClick onSectionClick;
 
-    public OrdersRecyclerViewAdapter(List<GetOneOrdersBean.Data> list, Context context){
-        this.list = list;
+    public OrdersRecyclerViewAdapter(Context context, int state, @Nullable List<GetOneOrdersBean.Data> data) {
+        super(R.layout.item_order, data);
+        this.mState = state;
         this.context = context;
     }
 
-    public void setOnSectionClick(OnSectionClick onSectionClick){
-        this.onSectionClick = onSectionClick;
-    }
-
-    public void setData(List<GetOneOrdersBean.Data> list){
-        this.list.addAll(list) ;
-    }
-
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_order,parent,false);
-        orderViewHolder viewHolder = new orderViewHolder(view);
-        return viewHolder;
-    }
+    protected void convert(BaseViewHolder helper, final GetOneOrdersBean.Data item) {
+        LinearLayout mItem = helper.getView(R.id.item);
+        TextView mOrderName = helper.getView(R.id.orderName);
+        TextView mIsPaid = helper.getView(R.id.isPaid);
+        TextView mOrderDescription = helper.getView(R.id.orderDescription);
+        TextView mOrderCharge = helper.getView(R.id.orderCharge);
+        RelativeLayout mBtn = helper.getView(R.id.btn);
+        TextView mPay = helper.getView(R.id.pay);
+        TextView mAssess = helper.getView(R.id.assess);
+        ImageView mImage = helper.getView(R.id.image);
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        String orderName = list.get(position).getOrderName();
-        int state = list.get(position).getState();
-        String orderDescription = list.get(position).getOrderDescription();
-        String orderCharge = list.get(position).getOrderCharge();
-        String url = SERVICE_URL + list.get(position).getImage();
+        String orderName = item.getOrderName();
+        final int state = item.getState();
+        String orderDescription = item.getOrderDescription();
+        String orderCharge = item.getOrderCharge();
+        String url = SERVICE_URL + item.getImage();
 
         switch (state){
             case 0:
-                ((orderViewHolder)holder).mIsPaid.setText("交易完成");
+                mIsPaid.setText("交易完成");
                 break;
             case 1:
-                ((orderViewHolder)holder).mIsPaid.setText("未处理");
+                mIsPaid.setText("未处理");
                 break;
             case 2:
-                ((orderViewHolder)holder).mIsPaid.setText("处理中");
+                mIsPaid.setText("处理中");
                 break;
             case 3:
-                ((orderViewHolder)holder).mIsPaid.setText("待评价");
-                ((orderViewHolder)holder).mBtn.setVisibility(View.VISIBLE);
-                ((orderViewHolder)holder).mAssess.setVisibility(View.VISIBLE);
+                mIsPaid.setText("待评价");
+                mBtn.setVisibility(View.VISIBLE);
+                mAssess.setVisibility(View.VISIBLE);
                 break;
             case 4:
-                ((orderViewHolder)holder).mIsPaid.setText("未支付");
-                ((orderViewHolder)holder).mBtn.setVisibility(View.VISIBLE);
-                ((orderViewHolder)holder).mPay.setVisibility(View.VISIBLE);
+                mIsPaid.setText("未支付");
+                mBtn.setVisibility(View.VISIBLE);
+                mPay.setVisibility(View.VISIBLE);
                 break;
         }
 
-        ((orderViewHolder)holder).mOrderName.setText(orderName);
-        ((orderViewHolder)holder).mOrderCharge.setText(orderCharge);
-        ((orderViewHolder)holder).mOrderDescription.setText(orderDescription);
+        mOrderName.setText(orderName);
+        mOrderCharge.setText(orderCharge);
+        mOrderDescription.setText(orderDescription);
+        Picasso.with(mContext).load(url).fit().into(mImage);
 
-        ((orderViewHolder)holder).mItem.setOnClickListener(new View.OnClickListener() {
+        mItem.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String orderId = list.get(position).getOrderId();
-                onSectionClick.onSectionClick(orderId,position);
+            public void onClick(View v) {
+                String orderId = item.getOrderId();
+                Intent intent = new Intent();
+                intent.setClass(context, PayActivity.class);
+                intent.putExtra("orderId",orderId);
+                intent.putExtra("state",mState);
+                context.startActivity(intent);
             }
         });
-
-        Picasso.with(context).load(url).fit().into(((orderViewHolder)holder).mImage);
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    class orderViewHolder extends RecyclerView.ViewHolder{
-        private LinearLayout mItem;
-        private TextView mOrderName;
-        private TextView mIsPaid;
-        private TextView mOrderDescription;
-        private TextView mOrderCharge;
-        private RelativeLayout mBtn;
-        private TextView mPay;
-        private TextView mAssess;
-        private ImageView mImage;
-        public orderViewHolder(View itemView) {
-            super(itemView);
-            mItem = itemView.findViewById(R.id.item);
-            mOrderName = itemView.findViewById(R.id.orderName);
-            mIsPaid = itemView.findViewById(R.id.isPaid);
-            mOrderDescription = itemView.findViewById(R.id.orderDescription);
-            mOrderCharge = itemView.findViewById(R.id.orderCharge);
-            mBtn = itemView.findViewById(R.id.btn);
-            mPay = itemView.findViewById(R.id.pay);
-            mAssess = itemView.findViewById(R.id.assess);
-            mImage = itemView.findViewById(R.id.image);
-        }
-    }
-
-    public interface OnSectionClick{
-        void onSectionClick(String orderId, int position);
-    }
 }

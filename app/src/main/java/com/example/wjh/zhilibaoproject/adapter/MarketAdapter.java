@@ -1,7 +1,9 @@
 package com.example.wjh.zhilibaoproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,83 +12,58 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.wjh.zhilibaoproject.R;
 import com.example.wjh.zhilibaoproject.bean.MarketListBean;
+import com.example.wjh.zhilibaoproject.ui.activity.MarketDetailModeActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import static com.example.wjh.zhilibaoproject.common.Config.SERVICE_URL;
 
-public class MarketAdapter extends RecyclerView.Adapter {
-    private List<MarketListBean.Data> list;
-    private Context context;
-    private OnSectionClick onSectionClick;
 
-    public MarketAdapter(List<MarketListBean.Data> list, Context context) {
-        this.list = list;
+
+public class MarketAdapter extends BaseQuickAdapter<MarketListBean.Data, BaseViewHolder> {
+    private Context context;
+
+    public MarketAdapter(Context context, @Nullable List<MarketListBean.Data> data) {
+        super(R.layout.item_market, data);
         this.context = context;
     }
 
-    public void setOnSectionClick(OnSectionClick onSectionClick) {
-        this.onSectionClick = onSectionClick;
-    }
-
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_market, parent, false);
-        marketViewHolder viewHolder = new marketViewHolder(view);
-        return viewHolder;
-    }
+    protected void convert(BaseViewHolder helper, final MarketListBean.Data item) {
+        LinearLayout mItem = helper.getView(R.id.item);
+        ImageView mPicture = helper.getView(R.id.picture);
+        TextView mTitle = helper.getView(R.id.title);
+        TextView mViews = helper.getView(R.id.views);
+        TextView mAuthor = helper.getView(R.id.author);
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
-        String title = list.get(position).getTitle();
-        String views = list.get(position).getViews();
-        String author = list.get(position).getAuthor();
-        String url = SERVICE_URL + "/static/image" + list.get(position).getPicture();
+        String title = item.getTitle();
+        String views = item.getViews();
+        String author = item.getAuthor();
+        String url = SERVICE_URL + "/static/image" + item.getPicture();
         if (title != null && !title.equals("")) {
-            ((marketViewHolder) holder).mTitle.setText(title);
+            mTitle.setText(title);
         }
 
-        ((marketViewHolder) holder).mViews.setText(views);
-        ((marketViewHolder) holder).mAuthor.setText(author);
-        ((marketViewHolder) holder).mItem.setOnClickListener(new View.OnClickListener() {
+        mViews.setText(views);
+        mAuthor.setText(author);
+        mItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mid = list.get(position).getId();
-                onSectionClick.onSectionClick(mid, position);
+                String mid = item.getId();
+                Intent intent = new Intent(context, MarketDetailModeActivity.class);
+                intent.putExtra("mid",mid);
+                context.startActivity(intent);
             }
         });
         Picasso
                 .with(context)
                 .load(url)
-                .into(((marketViewHolder) holder).mPicture);
+                .into(mPicture);
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    class marketViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout mItem;
-        public ImageView mPicture;
-        public TextView mTitle;
-        public TextView mViews;
-        public TextView mAuthor;
-
-        public marketViewHolder(View itemView) {
-            super(itemView);
-            mItem = itemView.findViewById(R.id.item);
-            mPicture = itemView.findViewById(R.id.picture);
-            mTitle = itemView.findViewById(R.id.title);
-            mViews = itemView.findViewById(R.id.views);
-            mAuthor = itemView.findViewById(R.id.author);
-        }
-    }
-
-    public interface OnSectionClick {
-        void onSectionClick(String mid, int position);
-    }
 }

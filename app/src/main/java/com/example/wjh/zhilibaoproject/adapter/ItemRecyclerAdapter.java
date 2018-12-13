@@ -13,7 +13,9 @@ import com.example.wjh.zhilibaoproject.bean.MeItemBean;
 import java.util.List;
 
 /**
- * Created by Administrator on 2018/5/10.
+ * Created by wjh on 2018/12/13 0013   20:26
+ * Description
+ * Email: 2281837849@qq.com
  */
 
 public class ItemRecyclerAdapter extends BaseQuickAdapter<MeItemBean, BaseViewHolder> {
@@ -30,6 +32,5 @@ public class ItemRecyclerAdapter extends BaseQuickAdapter<MeItemBean, BaseViewHo
         view.setImageResource(item.getId());
         title.setText(item.getTitle());
     }
-
 
 }

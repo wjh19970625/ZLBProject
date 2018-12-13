@@ -28,7 +28,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class EducationModeFragment extends BaseFragment implements TitleRecyclerViewAdapter.OnSectionClick {
+public class EducationModeFragment extends BaseFragment{
     private final static String TAG = EducationModeFragment.class.getSimpleName();
     private String mCategory;
     private RecyclerView mRecyclerView;
@@ -45,6 +45,8 @@ public class EducationModeFragment extends BaseFragment implements TitleRecycler
         super.initView(view);
         mRecyclerView =  view.findViewById(R.id.rv_education);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new TitleRecyclerViewAdapter(getContext(), null);
+        mRecyclerView.setAdapter(mAdapter);
         mRefresh = view.findViewById(R.id.refresh);
         mRefresh.setRefreshHeader(new ClassicsHeader(getContext()));
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
@@ -86,18 +88,10 @@ public class EducationModeFragment extends BaseFragment implements TitleRecycler
                                 list.add(data[i]);
                             }
 
-                            mAdapter = new TitleRecyclerViewAdapter(list,getContext());
-                            mAdapter.setOnSectionClick(EducationModeFragment.this);
-                            mRecyclerView.setAdapter(mAdapter);
+                            mAdapter.setNewData(list);
                         }
                     });
         }
     }
 
-    @Override
-    public void onSectionClick(String title, int position) {
-        Intent intent = new Intent(getContext(), ArticleDetailModeActivity.class);
-        intent.putExtra("title",title);
-        startActivity(intent);
-    }
 }

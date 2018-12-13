@@ -1,6 +1,5 @@
 package com.example.wjh.zhilibaoproject.ui.fragement;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -12,13 +11,11 @@ import com.example.wjh.zhilibaoproject.bean.MarketListBean;
 import com.example.wjh.zhilibaoproject.network.RetrofitHelper;
 import com.example.wjh.zhilibaoproject.network.api.IMarket;
 import com.example.wjh.zhilibaoproject.network.callback.MsgCallBack;
-import com.example.wjh.zhilibaoproject.ui.activity.MarketDetailModeActivity;
 import com.example.wjh.zhilibaoproject.ui.fragement.base.BaseFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
-import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +23,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class MarketFragment extends BaseFragment implements MarketAdapter.OnSectionClick {
+public class MarketFragment extends BaseFragment {
     private RecyclerView mRecyclerView;
     private MarketAdapter mAdapter;
     private SmartRefreshLayout mRefresh;
@@ -41,6 +38,9 @@ public class MarketFragment extends BaseFragment implements MarketAdapter.OnSect
         super.initView(view);
         mRecyclerView = view.findViewById(R.id.rv_market);
         mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));//设置瀑布流
+        mAdapter = new MarketAdapter(getContext(), null);
+        mRecyclerView.setAdapter(mAdapter);
+
         mRefresh = view.findViewById(R.id.refresh);
         mRefresh.setRefreshHeader(new ClassicsHeader(getContext()));
         mRefresh.setOnRefreshListener(new OnRefreshListener() {
@@ -55,7 +55,6 @@ public class MarketFragment extends BaseFragment implements MarketAdapter.OnSect
     protected void initData() {
         super.initData();
         getData();
-
     }
 
     private void getData(){
@@ -75,17 +74,8 @@ public class MarketFragment extends BaseFragment implements MarketAdapter.OnSect
                         for (int i = 0;i < data.length;i++){
                             list.add(data[i]);
                         }
-                        mAdapter = new MarketAdapter(list,getContext());
-                        mAdapter.setOnSectionClick(MarketFragment.this);
-                        mRecyclerView.setAdapter(mAdapter);
+                        mAdapter.setNewData(list);
                     }
                 });
-    }
-
-    @Override
-    public void onSectionClick(String mid, int position) {
-        Intent intent = new Intent(getContext(),MarketDetailModeActivity.class);
-        intent.putExtra("mid",mid);
-        startActivity(intent);
     }
 }

@@ -24,15 +24,13 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class OrderModeActivity extends ActionBarActivity implements OrdersRecyclerViewAdapter.OnSectionClick{
+public class OrderModeActivity extends ActionBarActivity{
     private final static String TAG = EducationModeFragment.class.getSimpleName();
     private int state;
     private  int indexPage = 1;
@@ -79,6 +77,8 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
         mNoData = (RelativeLayout) findViewById(R.id.no_data);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_mode_order);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new OrdersRecyclerViewAdapter(OrderModeActivity.this, state, null);
+        mRecyclerView.setAdapter(adapter);
         mRefresh = (SmartRefreshLayout) findViewById(R.id.refresh);
         mRefresh.setRefreshHeader(new ClassicsHeader(this));
         mRefresh.setRefreshFooter(new ClassicsFooter(this));
@@ -149,14 +149,11 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
                                 if (list.size() == 0){
                                     mRefresh.setEnableLoadMore(false);
                                 } else {
-                                    adapter.setData(list);
-                                    adapter.notifyDataSetChanged();
+                                    adapter.addData(list);
                                 }
                             }else {
-                                adapter = new OrdersRecyclerViewAdapter(list,OrderModeActivity.this);
-                                adapter.setOnSectionClick(OrderModeActivity.this);
+                                adapter.setNewData(list);
                             }
-
                         }
                     }
                 });
@@ -193,26 +190,13 @@ public class OrderModeActivity extends ActionBarActivity implements OrdersRecycl
                                 if (list.size() == 0){
                                     mRefresh.setEnableLoadMore(false);
                                 }else {
-                                    adapter.setData(list);
-                                    adapter.notifyDataSetChanged();
+                                    adapter.addData(list);
                                 }
                             }else {
-                                adapter = new OrdersRecyclerViewAdapter(list,OrderModeActivity.this);
-                                adapter.setOnSectionClick(OrderModeActivity.this);
-                                mRecyclerView.setAdapter(adapter);
+                                adapter.setNewData(list);
                             }
                         }
-
                     }
                 });
-    }
-
-    @Override
-    public void onSectionClick(String orderId, int position) {
-        Intent intent = new Intent();
-        intent.setClass(OrderModeActivity.this,PayActivity.class);
-        intent.putExtra("orderId",orderId);
-        intent.putExtra("state",state);
-        startActivity(intent);
     }
 }
