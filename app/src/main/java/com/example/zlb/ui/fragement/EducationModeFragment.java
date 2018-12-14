@@ -10,7 +10,7 @@ import com.example.zlb.R;
 import com.example.zlb.adapter.TitleRecyclerViewAdapter;
 import com.example.zlb.api.IArticle;
 import com.example.zlb.bean.ArticleTitleBean;
-import base.BaseFragment;
+import com.wjh.utillibrary.base.BaseFragment;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
@@ -19,9 +19,9 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import network.RetrofitHelper;
-import network.base.JsonItem;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.base.JsonItem;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
 

@@ -25,7 +25,7 @@
                 style="@style/TextView"
                 android:text="更换头像"/>
 
-            <view.CircleImageView
+            <com.wjh.utillibrary.view.CircleImageView
                 android:id="@+id/user_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

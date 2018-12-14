@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import static common.Config.SERVICE_URL;
+import static com.wjh.utillibrary.common.Config.SERVICE_URL;
 
 public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean.Data, BaseViewHolder> {
     private int mState;

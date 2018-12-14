@@ -15,7 +15,7 @@ import com.example.zlb.ui.activity.ArticleDetailModeActivity;
 
 import java.util.List;
 
-import utils.Utils;
+import com.wjh.utillibrary.utils.Utils;
 
 public class TitleRecyclerViewAdapter extends BaseQuickAdapter<ArticleTitleBean.Data, BaseViewHolder> {
     private Context context;

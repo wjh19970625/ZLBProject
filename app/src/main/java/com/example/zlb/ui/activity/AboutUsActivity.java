@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import com.example.zlb.R;
 
-import base.ActionBarActivity;
-import utils.Utils;
+import com.wjh.utillibrary.base.ActionBarActivity;
+import com.wjh.utillibrary.utils.Utils;
 
 
 public class AboutUsActivity extends ActionBarActivity {

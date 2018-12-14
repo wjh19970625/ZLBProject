@@ -33,15 +33,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import base.WidgetActivity;
-import common.Config;
+import com.wjh.utillibrary.base.WidgetActivity;
+import com.wjh.utillibrary.common.Config;
 import crossoverone.statuslib.StatusUtil;
-import network.RetrofitHelper;
-import network.base.JsonItem;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.base.JsonItem;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import utils.UserInfoHelper;
+import com.wjh.utillibrary.utils.UserInfoHelper;
 
 public class ProductDetailActivity extends WidgetActivity {
     private final static String TAG = ProductDetailActivity.class.getSimpleName();
@@ -393,13 +393,13 @@ public class ProductDetailActivity extends WidgetActivity {
 //                .setMessage("服务商品:"+name+"\n"+"数量:"+num+"\n"+"合计:"+sum)
 //                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
 //                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
+//                    public void onClick(DialogInterface com.wjh.utillibrary.view.dialog, int which) {
 //
 //                    }
 //                })
 //                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
 //                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
+//                    public void onClick(DialogInterface com.wjh.utillibrary.view.dialog, int which) {
 //                        String WIDbody = description;
 //                        String WIDsubject = name;
 //                        double WIDtotal_amount = sum;

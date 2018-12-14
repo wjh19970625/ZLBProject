@@ -4,8 +4,8 @@ import android.app.Application;
 
 import com.awen.photo.FrescoImageLoader;
 
-import utils.Logger;
-import utils.UserInfoHelper;
+import com.wjh.utillibrary.utils.Logger;
+import com.wjh.utillibrary.utils.UserInfoHelper;
 
 public class MyApplication extends Application {
     private static MyApplication application;

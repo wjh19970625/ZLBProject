@@ -9,8 +9,8 @@ import android.support.annotation.Nullable;
 
 import com.example.zlb.R;
 
-import base.WidgetActivity;
-import common.Config;
+import com.wjh.utillibrary.base.WidgetActivity;
+import com.wjh.utillibrary.common.Config;
 import crossoverone.statuslib.StatusUtil;
 
 public class SplashActivity extends WidgetActivity {

@@ -12,13 +12,13 @@ import com.example.zlb.R;
 import com.example.zlb.api.IUser;
 import com.example.zlb.bean.CallBackBaseBean;
 
-import base.ActionBarActivity;
-import network.RetrofitHelper;
-import network.base.JsonItem;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.base.ActionBarActivity;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.base.JsonItem;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import utils.Utils;
+import com.wjh.utillibrary.utils.Utils;
 
 public class ForgetPasswordActivity extends ActionBarActivity {
     private EditText mNickname;

@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.example.zlb.R;
 import com.example.zlb.adapter.ChildFragmentViewPagerAdapter;
-import base.BaseFragment;
+import com.wjh.utillibrary.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;

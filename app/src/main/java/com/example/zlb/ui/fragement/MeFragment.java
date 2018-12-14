@@ -28,20 +28,20 @@ import com.example.zlb.ui.activity.LoginActivity;
 import com.example.zlb.ui.activity.MoreActivity;
 import com.example.zlb.ui.activity.OrderModeActivity;
 import com.example.zlb.ui.activity.PersonalDataActivity;
-import base.BaseFragment;
+import com.wjh.utillibrary.base.BaseFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import common.Config;
-import network.RetrofitHelper;
-import network.base.JsonItem;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.common.Config;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.base.JsonItem;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import utils.UserInfoHelper;
-import view.CircleImageView;
+import com.wjh.utillibrary.utils.UserInfoHelper;
+import com.wjh.utillibrary.view.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 

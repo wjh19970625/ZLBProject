@@ -14,15 +14,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import base.WidgetActivity;
-import network.RetrofitHelper;
-import network.base.JsonItem;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.base.WidgetActivity;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.base.JsonItem;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import utils.Utils;
+import com.wjh.utillibrary.utils.Utils;
 
-import static common.Config.SERVICE_URL;
+import static com.wjh.utillibrary.common.Config.SERVICE_URL;
 
 public class MarketDetailModeActivity extends WidgetActivity {
     private ImageView mPicture;

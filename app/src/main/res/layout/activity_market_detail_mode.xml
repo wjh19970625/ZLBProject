@@ -104,7 +104,7 @@
             android:layout_marginLeft="@dimen/layout_margin"
             android:gravity="center">
 
-            <view.CircleImageView
+            <com.wjh.utillibrary.view.CircleImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/white_back_gray"/>

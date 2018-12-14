@@ -21,9 +21,9 @@ import com.example.zlb.ui.fragement.MeFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import base.WidgetActivity;
+import com.wjh.utillibrary.base.WidgetActivity;
 import crossoverone.statuslib.StatusUtil;
-import view.NoScrollViewPager;
+import com.wjh.utillibrary.view.NoScrollViewPager;
 
 public class MainActivity extends WidgetActivity {
     private NoScrollViewPager mAty_main_vp;

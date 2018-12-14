@@ -18,13 +18,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import base.ActionBarActivity;
-import common.Config;
-import network.RetrofitHelper;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.base.ActionBarActivity;
+import com.wjh.utillibrary.common.Config;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import utils.UserInfoHelper;
+import com.wjh.utillibrary.utils.UserInfoHelper;
 
 public class PersonalDataActivity extends ActionBarActivity {
     private final static String TAG = PersonalDataActivity.class.getSimpleName();

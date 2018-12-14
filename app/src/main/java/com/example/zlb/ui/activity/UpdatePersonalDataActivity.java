@@ -19,15 +19,15 @@ import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
-import base.ActionBarActivity;
-import common.Config;
-import network.RetrofitHelper;
-import network.base.JsonItem;
-import network.callback.MsgCallBack;
+import com.wjh.utillibrary.base.ActionBarActivity;
+import com.wjh.utillibrary.common.Config;
+import com.wjh.utillibrary.network.RetrofitHelper;
+import com.wjh.utillibrary.network.base.JsonItem;
+import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import utils.Utils;
-import view.CircleImageView;
+import com.wjh.utillibrary.utils.Utils;
+import com.wjh.utillibrary.view.CircleImageView;
 
 public class UpdatePersonalDataActivity extends ActionBarActivity {
     private TextView mNickName;
