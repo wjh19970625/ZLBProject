@@ -3,5 +3,5 @@
     <font
         android:fontStyle="normal"
         android:fontWeight="400"
-        android:font="@font/fj"/>
+        android:font="@font/fangjian"/>
 </font-family>

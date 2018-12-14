@@ -7,7 +7,7 @@ def releaseTime() {
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "com.example.wjh.zhilibaoprogject"
+        applicationId "com.example.wjh.zlb"
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1

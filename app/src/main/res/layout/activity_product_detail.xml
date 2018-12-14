@@ -155,7 +155,7 @@
             android:layout_marginLeft="@dimen/layout_margin"
             android:gravity="center">
 
-            <com.example.wjh.zhilibaoproject.view.CircleImageView
+            <com.example.wjh.zlb.view.CircleImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:src="@drawable/white_back_gray"/>
