@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.example.wjh.zlb.utils.NoScrollViewPager
+    <view.NoScrollViewPager
         android:id="@+id/aty_main_vp"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"></com.example.wjh.zlb.utils.NoScrollViewPager>
+        android:layout_weight="1"></view.NoScrollViewPager>
 
     <ImageView
         android:layout_width="match_parent"

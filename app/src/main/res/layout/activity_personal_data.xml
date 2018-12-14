@@ -17,7 +17,7 @@
 
         </LinearLayout>
 
-        <com.example.wjh.zlb.view.CircleImageView
+        <com.example.zlb.view.CircleImageView
             android:id="@+id/user_image"
             android:layout_width="70dp"
             android:layout_height="70dp"

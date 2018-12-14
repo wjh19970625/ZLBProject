@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_white">#ffffff</color>
+    <color name="app_text_dark">#333333</color>  <!--app字体颜色 程序默认色-->
+    <color name="app_line">#F5F5F5</color>
+</resources>
