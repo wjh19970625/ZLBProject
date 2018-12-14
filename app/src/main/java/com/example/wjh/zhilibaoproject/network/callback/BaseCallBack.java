@@ -23,7 +23,7 @@ public abstract class BaseCallBack<T> implements Callback<T> {
     }
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
-        String result = response.body().toString();
+        String result = response.toString();
         Logger.e("   \n");
         Logger.e("---------------------Request Log Start---------------------");
         Logger.e("| Response:" + result);

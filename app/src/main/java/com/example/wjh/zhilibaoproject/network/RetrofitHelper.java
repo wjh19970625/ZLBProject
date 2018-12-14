@@ -25,7 +25,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitHelper {
     private static RetrofitHelper retrofitHelper;
     private Retrofit mRetrofit;
-    private final static String TAG = "RetrofitHelper";
 
     protected RetrofitHelper(){
 
@@ -56,7 +55,6 @@ public class RetrofitHelper {
                     Retrofit.Builder builder = new Retrofit.Builder().baseUrl(Config.SERVICE_URL).addConverterFactory(gsonConverterFactory);
                     retrofitMachining(okHttpClient);
                     mRetrofit = builder.client(okHttpClient.build()).build();
-                    Log.e(TAG, mRetrofit.toString());
                 }
             }
         }
