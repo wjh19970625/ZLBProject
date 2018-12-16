@@ -41,7 +41,7 @@ public abstract class ActionBarActivity extends WidgetActivity {
         }
 
         setSupportActionBar(mCenterToolbar);
-        mCenterToolbar.setNavigationIcon(R.mipmap.white_back);
+        mCenterToolbar.setNavigationIcon(R.mipmap.black_back);
         mCenterToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

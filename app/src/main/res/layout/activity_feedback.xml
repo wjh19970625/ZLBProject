@@ -9,12 +9,13 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="180dip"
+        android:layout_marginTop="@dimen/layout_margin"
         style="@style/editTextBackground"
         android:inputType="textMultiLine"
         android:gravity="top"
         android:hint="请输入您的意见反馈，我们会为您不断提升"/>
 
-    <TextView
+    <Button
         android:id="@+id/submit"
         android:layout_marginTop="@dimen/layout_margin_large"
         android:layout_marginHorizontal="@dimen/layout_margin"

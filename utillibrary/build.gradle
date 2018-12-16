@@ -47,4 +47,6 @@ dependencies {
     api "me.imid.swipebacklayout.lib:library:1.1.0"
 
     api 'com.github.crossoverone:StatusBarUtil:1.3.3'
+
+    api 'com.github.hackware1993:MagicIndicator:1.5.0'
 }

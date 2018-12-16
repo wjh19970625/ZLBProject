@@ -26,7 +26,7 @@ import com.example.zlb.ui.activity.ChangePasswordActivity;
 import com.example.zlb.ui.activity.FeedBackActivity;
 import com.example.zlb.ui.activity.LoginActivity;
 import com.example.zlb.ui.activity.MoreActivity;
-import com.example.zlb.ui.activity.OrderModeActivity;
+import com.example.zlb.ui.activity.OrderActivity;
 import com.example.zlb.ui.activity.PersonalDataActivity;
 import com.wjh.utillibrary.base.BaseFragment;
 import com.squareup.picasso.Picasso;
@@ -40,6 +40,7 @@ import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
+
 import com.wjh.utillibrary.utils.UserInfoHelper;
 import com.wjh.utillibrary.view.CircleImageView;
 
@@ -138,24 +139,24 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 if (code == LOGIN_OK){
-                    Intent intent = new Intent(getContext(),OrderModeActivity.class);
+                    Intent intent = new Intent(getContext(),OrderActivity.class);
                     switch (position){
                         case 0:
-                            intent.putExtra("state",4);
+                            intent.putExtra("index",1);
                             break;
                         case 1:
-                            intent.putExtra("state",1);
+                            intent.putExtra("index",2);
                             break;
                         case 2:
-                            intent.putExtra("state",2);
+                            intent.putExtra("index",3);
                             break;
 
                         case 3:
-                            intent.putExtra("state",3);
+                            intent.putExtra("index",4);
                             break;
 
                         case 4:
-                            intent.putExtra("state",0);
+                            intent.putExtra("index",5);
                             break;
                     }
                     startActivity(intent);
@@ -247,8 +248,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
 
             case R.id.order_all:
                 if (code == LOGIN_OK){
-                    Intent intent = new Intent(getContext(),OrderModeActivity.class);
-                    intent.putExtra("state",9);
+                    Intent intent = new Intent(getContext(), OrderActivity.class);
+                    intent.putExtra("index",0);
                     startActivity(intent);
                 }else {
                     showToast("请先登录");

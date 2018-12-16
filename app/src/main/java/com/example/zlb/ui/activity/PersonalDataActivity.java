@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,7 @@ public class PersonalDataActivity extends ActionBarActivity {
     private TextView mBirthday;
     private TextView mPhoneNumber;
     private TextView mEmail;
-    private TextView mExit;
+    private Button mExit;
     private TextView mUpdateData;
     private ImageView mSex;
     private ImageView mUserImage;
@@ -72,7 +73,7 @@ public class PersonalDataActivity extends ActionBarActivity {
         mBirthday = (TextView) findViewById(R.id.birthday);
         mPhoneNumber = (TextView) findViewById(R.id.phoneNumber);
         mEmail = (TextView) findViewById(R.id.email);
-        mExit = (TextView) findViewById(R.id.exit);
+        mExit = (Button) findViewById(R.id.exit);
         mUpdateData = (TextView) findViewById(R.id.update_data);
         mSex = (ImageView) findViewById(R.id.sex);
         mUserImage = (ImageView) findViewById(R.id.user_image);

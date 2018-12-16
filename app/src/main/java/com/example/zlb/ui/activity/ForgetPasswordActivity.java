@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class ForgetPasswordActivity extends ActionBarActivity {
     private EditText mPhoneNumber;
     private EditText mCode;
     private TextView mGetPinTv;
-    private TextView mFind;
+    private Button mFind;
     private static final int CODE_WHAT = 1001;
     private int count = 60;
     private static  String Str = "(S)后重试";
@@ -70,7 +71,7 @@ public class ForgetPasswordActivity extends ActionBarActivity {
         mPhoneNumber = (EditText) findViewById(R.id.phoneNumber);
         mGetPinTv = (TextView) findViewById(R.id.get_pin_tv);
         mCode = (EditText) findViewById(R.id.code);
-        mFind = (TextView) findViewById(R.id.find);
+        mFind = (Button) findViewById(R.id.find);
     }
 
     @Override

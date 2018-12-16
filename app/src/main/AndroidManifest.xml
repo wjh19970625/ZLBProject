@@ -114,7 +114,7 @@
         </activity>
 
         <activity
-            android:name=".ui.activity.OrderModeActivity"
+            android:name=".ui.activity.OrderActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:theme="@style/NoTitleTheme">
         </activity>

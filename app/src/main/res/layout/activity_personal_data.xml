@@ -13,7 +13,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:background="@drawable/background_style_blue">
+            android:background="@color/app_line">
 
         </LinearLayout>
 
@@ -177,7 +177,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
         android:id="@+id/exit"
         android:layout_marginTop="@dimen/layout_margin_medium"
         android:layout_width="match_parent"

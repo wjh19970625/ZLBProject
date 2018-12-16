@@ -7,7 +7,15 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_marginTop="@dimen/layout_margin"
+        android:id="@+id/back"
+        android:layout_marginTop="@dimen/layout_margin_medium"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/white_back"/>
+
+    <ImageView
+
         android:layout_marginBottom="@dimen/layout_margin"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -95,7 +103,7 @@
                 android:layout_marginHorizontal="@dimen/layout_margin"
                 android:background="@color/gray2"/>
 
-            <TextView
+            <Button
                 android:id="@+id/login_btn"
                 android:layout_marginTop="@dimen/layout_margin_medium"
                 android:layout_width="match_parent"
@@ -111,7 +119,7 @@
                 android:textColor="@color/gray3"
                 android:text="或"/>
 
-            <TextView
+            <Button
                 android:id="@+id/register_btn"
                 android:layout_marginTop="@dimen/layout_margin_mini"
                 android:layout_marginBottom="@dimen/layout_margin"

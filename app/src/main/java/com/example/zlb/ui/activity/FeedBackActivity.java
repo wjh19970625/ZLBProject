@@ -1,6 +1,7 @@
 package com.example.zlb.ui.activity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import retrofit2.Response;
 
 public class FeedBackActivity extends ActionBarActivity {
     private EditText mContent;
-    private TextView mSubmit;
+    private Button mSubmit;
 
     @Override
     protected int getContentLayoutId() {
@@ -29,7 +30,7 @@ public class FeedBackActivity extends ActionBarActivity {
         super.initView();
         setCenterTitle("意见反馈");
         mContent = (EditText) findViewById(R.id.content);
-        mSubmit = (TextView) findViewById(R.id.submit);
+        mSubmit = (Button) findViewById(R.id.submit);
     }
 
     @Override

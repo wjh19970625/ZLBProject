@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,7 +28,7 @@ public class RegisterActivity extends ActionBarActivity {
     private EditText mPhoneNumber;
     private EditText mVerificationCode;
     private TextView mGetPinTv;
-    private TextView mRegisterBtn;
+    private Button mRegisterBtn;
     private static final int CODE_WHAT = 1001;
     private int count = 60;
     private static  String Str = "(S)后重试";
@@ -70,7 +71,7 @@ public class RegisterActivity extends ActionBarActivity {
         mPhoneNumber = (EditText) findViewById(R.id.phoneNumber);
         mGetPinTv = (TextView) findViewById(R.id.get_pin_tv);
         mVerificationCode = (EditText) findViewById(R.id.verificationCode);
-        mRegisterBtn = (TextView) findViewById(R.id.register_btn);
+        mRegisterBtn = (Button) findViewById(R.id.register_btn);
     }
 
     @Override

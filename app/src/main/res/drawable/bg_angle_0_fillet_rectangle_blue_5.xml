@@ -3,8 +3,8 @@
     <corners android:radius="5dp"></corners>
     <!--angle为渐变角度-->
     <gradient
-        android:startColor="@color/blue1"
-        android:endColor="@color/blue2"
+        android:startColor="@color/blue"
+        android:endColor="@color/blue"
         android:angle="0" />
     <padding
         android:bottom="@dimen/layout_margin_mini"

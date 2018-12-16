@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray1"
-
     android:orientation="vertical">
 
     <LinearLayout
@@ -11,6 +10,7 @@
         android:layout_height="wrap_content"
         android:paddingRight="@dimen/layout_margin"
         android:paddingLeft="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
         android:background="@color/white"
         android:orientation="vertical">
 
@@ -39,7 +39,7 @@
 
         </LinearLayout>
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray2"/>
@@ -69,7 +69,7 @@
 
         </LinearLayout>
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray2"/>
@@ -99,7 +99,7 @@
 
         </LinearLayout>
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray2"/>
@@ -129,7 +129,7 @@
 
         </LinearLayout>
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/gray2"/>
@@ -183,21 +183,15 @@
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/gray2"/>
-
     </LinearLayout>
 
-    <TextView
+    <Button
         android:id="@+id/register_btn"
         android:layout_marginTop="@dimen/layout_margin_large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/layout_margin"
         style="@style/submitText1"
-        android:text="注册"
-        />
+        android:text="注册" />
 
 </LinearLayout>

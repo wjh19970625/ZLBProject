@@ -1,9 +1,6 @@
-package com.example.zlb.ui.activity;
+package com.example.zlb.ui.fragement;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,25 +11,25 @@ import com.example.zlb.R;
 import com.example.zlb.adapter.OrdersRecyclerViewAdapter;
 import com.example.zlb.api.IOrder;
 import com.example.zlb.bean.GetOneOrdersBean;
-import com.example.zlb.ui.fragement.EducationModeFragment;
+
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.wjh.utillibrary.base.ActionBarActivity;
+import com.wjh.utillibrary.base.BaseFragment;
 import com.wjh.utillibrary.network.RetrofitHelper;
 import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class OrderModeActivity extends ActionBarActivity {
-    private final static String TAG = EducationModeFragment.class.getSimpleName();
-    private int state;
+public class OrderFragment extends BaseFragment {
+    private final static String TAG = OrderFragment.class.getSimpleName();
+    private String state;
     private  int indexPage = 1;
     private RelativeLayout mNoData;
     private RecyclerView mRecyclerView;
@@ -40,59 +37,32 @@ public class OrderModeActivity extends ActionBarActivity {
     private SmartRefreshLayout mRefresh;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.fragment_order;
     }
 
     @Override
-    protected int getContentLayoutId() {
-        return R.layout.activity_mode_order;
-    }
-
-    @Override
-    public void initView() {
-        super.initView();
-        Intent intent = getIntent();
-        state = intent.getIntExtra("state",9);
-        switch (state){
-            case 0:
-                setCenterTitle("已完成订单");
-                break;
-            case 1:
-                setCenterTitle("未受理订单");
-                break;
-            case 2:
-                setCenterTitle("处理中订单");
-                break;
-            case 3:
-                setCenterTitle("待评价订单");
-                break;
-            case 4:
-                setCenterTitle("未支付订单");
-                break;
-            case 9:
-                setCenterTitle("全部订单");
-                break;
+    protected void initView(View view) {
+        super.initView(view);
+        if (getArguments() != null) {
+            state = getArguments().getString("state");
         }
-        mNoData = (RelativeLayout) findViewById(R.id.no_data);
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_mode_order);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new OrdersRecyclerViewAdapter(OrderModeActivity.this, state, null);
+
+        mNoData = view.findViewById(R.id.no_data);
+        mRecyclerView = view.findViewById(R.id.rv_mode_order);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new OrdersRecyclerViewAdapter(getContext(), null);
         mRecyclerView.setAdapter(adapter);
-        mRefresh = (SmartRefreshLayout) findViewById(R.id.refresh);
-        mRefresh.setRefreshHeader(new ClassicsHeader(this));
-        mRefresh.setRefreshFooter(new ClassicsFooter(this));
+        mRefresh = view.findViewById(R.id.refresh);
+        mRefresh.setRefreshHeader(new ClassicsHeader(getContext()));
+        mRefresh.setRefreshFooter(new ClassicsFooter(getContext()));
         mRefresh.setEnableRefresh(true);
 
         mRefresh.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 indexPage++;
-                if (state == 9){
-                    getAllOrders(indexPage);
-                } else {
-                    getOneOrders(indexPage);
-                }
+                requestData();
             }
 
             @Override
@@ -100,29 +70,29 @@ public class OrderModeActivity extends ActionBarActivity {
                 //初始化页数
                 indexPage = 1;
                 mRefresh.setEnableLoadMore(true);
-                if (state == 9){
-                    getAllOrders(indexPage);
-                } else {
-                    getOneOrders(indexPage);
-                }
+                requestData();
             }
         });
     }
 
-    @Override
-    public void initData() {
-        super.initData();
-        if (state == 9){
+    private void requestData(){
+        if (state.equals("9")){
             getAllOrders(indexPage);
         } else {
             getOneOrders(indexPage);
         }
     }
 
+    @Override
+    protected void initData() {
+        super.initData();
+        mRefresh.autoRefresh();
+    }
+
     private void getOneOrders(final int indexPage){
         IOrder orderObj = RetrofitHelper.create(IOrder.class);
         orderObj.getMyOneOrders(RetrofitHelper.getBody(new JsonItem("orderState",state),new JsonItem("indexPage",indexPage)))
-                .enqueue(new MsgCallBack<GetOneOrdersBean>(OrderModeActivity.this,true) {
+                .enqueue(new MsgCallBack<GetOneOrdersBean>(getContext(),false) {
                     @Override
                     public void onFailed(Call<GetOneOrdersBean> call, Throwable t) {
                         mRefresh.finishRefresh();
@@ -162,7 +132,7 @@ public class OrderModeActivity extends ActionBarActivity {
     private void getAllOrders(final int indexPage){
         IOrder orderObj = RetrofitHelper.create(IOrder.class);
         orderObj.getMyAllOrders(RetrofitHelper.getBody(new JsonItem("indexPage",indexPage)))
-                .enqueue(new MsgCallBack<GetOneOrdersBean>(OrderModeActivity.this,true) {
+                .enqueue(new MsgCallBack<GetOneOrdersBean>(getContext(),false) {
                     @Override
                     public void onFailed(Call<GetOneOrdersBean> call, Throwable t) {
                         mRefresh.finishRefresh();
@@ -199,4 +169,7 @@ public class OrderModeActivity extends ActionBarActivity {
                     }
                 });
     }
+
 }
+
+

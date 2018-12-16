@@ -21,12 +21,10 @@ import java.util.List;
 import static com.wjh.utillibrary.common.Config.SERVICE_URL;
 
 public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean.Data, BaseViewHolder> {
-    private int mState;
     private Context context;
 
-    public OrdersRecyclerViewAdapter(Context context, int state, @Nullable List<GetOneOrdersBean.Data> data) {
+    public OrdersRecyclerViewAdapter(Context context, @Nullable List<GetOneOrdersBean.Data> data) {
         super(R.layout.item_order, data);
-        this.mState = state;
         this.context = context;
     }
 
@@ -79,10 +77,11 @@ public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean
             @Override
             public void onClick(View v) {
                 String orderId = item.getOrderId();
+                int state = item.getState();
                 Intent intent = new Intent();
                 intent.setClass(context, PayActivity.class);
                 intent.putExtra("orderId",orderId);
-                intent.putExtra("state",mState);
+                intent.putExtra("state",state);
                 context.startActivity(intent);
             }
         });

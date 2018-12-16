@@ -70,14 +70,13 @@
 
     </LinearLayout>
 
-    <TextView
+    <Button
         android:id="@+id/submit"
         android:layout_marginTop="@dimen/layout_margin_large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/layout_margin"
         style="@style/submitText1"
-        android:text="确认"
-        />
+        android:text="确认" />
 
 </LinearLayout>

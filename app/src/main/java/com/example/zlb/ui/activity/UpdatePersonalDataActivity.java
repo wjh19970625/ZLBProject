@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
     private EditText mAddress;
     private EditText mPhoneNumber;
     private EditText mEmail;
-    private TextView mSave;
+    private Button mSave;
     private CircleImageView mUserImage;
     private RelativeLayout mChangeImg;
 
@@ -48,7 +49,6 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
     private String phoneNumber;
     private String email;
     private String url;
-    private Bitmap bitmap;
     public final static int REQUEST_PICK_IMG = 10024;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -85,7 +85,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
         mAddress = (EditText) findViewById(R.id.address);
         mPhoneNumber = (EditText) findViewById(R.id.phoneNumber);
         mEmail = (EditText) findViewById(R.id.email);
-        mSave = (TextView) findViewById(R.id.save);
+        mSave = (Button) findViewById(R.id.save);
         mChangeImg = (RelativeLayout) findViewById(R.id.change_img);
         mUserImage = (CircleImageView) findViewById(R.id.user_image);
     }

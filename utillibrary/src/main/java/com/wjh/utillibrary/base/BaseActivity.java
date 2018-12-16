@@ -90,7 +90,7 @@ public abstract class BaseActivity extends SwipeBackActivity {
 
     protected void setSystemInvadeBlack(){
         // 第二个参数是是否沉浸,第三个参数是状态栏字体是否为黑色。
-        StatusUtil.setSystemStatus(this, true, false);
+        StatusUtil.setSystemStatus(this, true, true);
 
     }
     /*Destroy*/

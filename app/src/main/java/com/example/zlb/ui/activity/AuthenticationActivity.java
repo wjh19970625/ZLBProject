@@ -3,6 +3,7 @@ package com.example.zlb.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -20,7 +21,7 @@ import retrofit2.Response;
 public class AuthenticationActivity extends ActionBarActivity {
     private EditText mTrueName;
     private EditText mIdCard;
-    private TextView mSubmit;
+    private Button mSubmit;
     private String trueName;
     private String idCard;
 
@@ -36,7 +37,7 @@ public class AuthenticationActivity extends ActionBarActivity {
 
         mTrueName = (EditText) findViewById(R.id.true_name);
         mIdCard = (EditText) findViewById(R.id.id_card);
-        mSubmit = (TextView) findViewById(R.id.submit);
+        mSubmit = (Button) findViewById(R.id.submit);
     }
 
     @Override

@@ -9,6 +9,7 @@
         android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin"
         android:paddingHorizontal="@dimen/layout_margin"
         android:paddingVertical="@dimen/layout_margin"
         android:background="@color/white">

@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/layout_margin"
         android:paddingVertical="@dimen/layout_margin"
+        android:layout_marginTop="@dimen/layout_margin"
         android:background="@color/white">
 
         <TextView

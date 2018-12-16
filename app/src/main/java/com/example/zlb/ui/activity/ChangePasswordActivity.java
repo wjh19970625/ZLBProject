@@ -1,6 +1,7 @@
 package com.example.zlb.ui.activity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -19,7 +20,7 @@ public class ChangePasswordActivity extends ActionBarActivity {
     private EditText mOldPassword;
     private EditText mNewPassword;
     private EditText mSubmitPassword;
-    private TextView mSubmit;
+    private Button mSubmit;
 
     @Override
     public void initView() {
@@ -28,7 +29,7 @@ public class ChangePasswordActivity extends ActionBarActivity {
         mOldPassword = (EditText) findViewById(R.id.old_password);
         mNewPassword = (EditText) findViewById(R.id.new_password);
         mSubmitPassword = (EditText) findViewById(R.id.new_password_submit);
-        mSubmit = (TextView) findViewById(R.id.submit);
+        mSubmit = (Button) findViewById(R.id.submit);
     }
 
     @Override
