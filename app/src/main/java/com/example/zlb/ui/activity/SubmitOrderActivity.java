@@ -6,11 +6,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.zlb.R;
 import com.example.zlb.api.IOrder;
 import com.example.zlb.bean.CreateOrdersBean;
-import com.squareup.picasso.Picasso;
-
 import com.wjh.utillibrary.base.ActionBarActivity;
 import com.wjh.utillibrary.network.RetrofitHelper;
 import com.wjh.utillibrary.network.base.JsonItem;
@@ -78,7 +77,7 @@ public class SubmitOrderActivity extends ActionBarActivity {
         mNum.setText(num+"");
         mSum.setText(sum+"");
         mSum1.setText(sum+"");
-        Picasso.with(SubmitOrderActivity.this).load(url).into(mPicture);
+        Glide.with(SubmitOrderActivity.this).load(url).into(mPicture);
 
         mCommit.setOnClickListener(new View.OnClickListener() {
             @Override

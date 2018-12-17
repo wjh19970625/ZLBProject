@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zlb.R;
 import com.example.zlb.adapter.ItemRecyclerAdapter;
@@ -30,7 +31,6 @@ import com.example.zlb.ui.activity.MoreActivity;
 import com.example.zlb.ui.activity.OrderActivity;
 import com.example.zlb.ui.activity.PersonalDataActivity;
 import com.wjh.utillibrary.base.BaseFragment;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -354,7 +354,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
                             String nickname = data.getNickname();
                             String imageUrl = Config.SERVICE_URL + "/static/image" + data.getImage();
 
-                            Picasso
+                            Glide
                                     .with(getContext())
                                     .load(imageUrl)
                                     .into(mUserImage);

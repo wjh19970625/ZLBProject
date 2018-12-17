@@ -5,11 +5,11 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.zlb.R;
 import com.example.zlb.bean.ProductListBean;
-import com.squareup.picasso.Picasso;
 
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class ProductAdapter extends BaseQuickAdapter<ProductListBean.Data,BaseVi
         ImageView mDetailsPic = helper.getView(R.id.details_pic);
 
         //加载网络图片并进行填充
-        Picasso.with(mContext).load(url).into(mDetailsPic);
+        Glide.with(mContext).load(url).into(mDetailsPic);
         mName.setText(item.getName());
         mServiceCharge.setText(item.getServiceCharge());
         mOfficialCharge.setText(item.getOfficialCharge());

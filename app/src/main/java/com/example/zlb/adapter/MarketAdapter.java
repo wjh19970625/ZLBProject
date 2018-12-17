@@ -8,12 +8,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.zlb.R;
 import com.example.zlb.bean.MarketListBean;
 import com.example.zlb.ui.activity.MarketDetailModeActivity;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class MarketAdapter extends BaseQuickAdapter<MarketListBean.Data, BaseVie
                 context.startActivity(intent);
             }
         });
-        Picasso
+        Glide
                 .with(context)
                 .load(url)
                 .into(mPicture);

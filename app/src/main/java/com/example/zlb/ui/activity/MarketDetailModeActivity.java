@@ -7,11 +7,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.awen.photo.photopick.controller.PhotoPagerConfig;
+import com.bumptech.glide.Glide;
 import com.example.zlb.R;
 import com.example.zlb.api.IMarket;
 import com.example.zlb.bean.MarketDetailBean;
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 import com.wjh.utillibrary.base.WidgetActivity;
@@ -80,7 +79,7 @@ public class MarketDetailModeActivity extends WidgetActivity {
                                 long createTime = data.getCreateTime();
                                 String time = Utils.timeStamp2Date(createTime,null);
 
-                                Picasso
+                                Glide
                                         .with(MarketDetailModeActivity.this)
                                         .load(mUrl)
                                         .into(mPicture);

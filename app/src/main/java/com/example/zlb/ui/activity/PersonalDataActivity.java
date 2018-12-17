@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.awen.photo.photopick.controller.PhotoPagerConfig;
+import com.bumptech.glide.Glide;
 import com.example.zlb.R;
 import com.example.zlb.api.IUser;
 import com.example.zlb.bean.UserInfBean;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -180,7 +180,7 @@ public class PersonalDataActivity extends ActionBarActivity {
                                 int role = data.getRole();
                                 int state = data.getState();
                                 url = Config.SERVICE_URL + "/static/image" + response.body().getData().getImage();
-                                Picasso
+                                Glide
                                         .with(PersonalDataActivity.this)
                                         .load(url)
                                         .into(mUserImage);

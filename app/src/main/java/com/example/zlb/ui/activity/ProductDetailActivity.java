@@ -26,10 +26,10 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.awen.photo.photopick.controller.PhotoPagerConfig;
+import com.bumptech.glide.Glide;
 import com.example.zlb.R;
 import com.example.zlb.api.IProduct;
 import com.example.zlb.bean.ProductDetailBean;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -137,12 +137,12 @@ public class ProductDetailActivity extends WidgetActivity {
                         mUrl = Config.SERVICE_URL + defaultUrl + response.body().getData().getDetails();
                         //商品
                         mUrlImage = Config.SERVICE_URL + defaultUrl + response.body().getData().getPicture();
-                        Picasso
+                        Glide
                                 .with(ProductDetailActivity.this)
                                 .load(mUrlImage)
                                 .into(mImage);
 
-                        Picasso
+                        Glide
                                 .with(ProductDetailActivity.this)
                                 .load(mUrl)
                                 .into(mDetail);

@@ -15,12 +15,12 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
+import com.bumptech.glide.Glide;
 import com.example.zlb.R;
 import com.example.zlb.api.IOrder;
 import com.example.zlb.api.IProduct;
 import com.example.zlb.bean.CallBackBaseBean;
 import com.example.zlb.bean.GetOrderDetailBean;
-import com.squareup.picasso.Picasso;
 
 import java.util.Map;
 
@@ -145,7 +145,7 @@ public class PayActivity extends ActionBarActivity {
                             mOrderId.setText(orderId);
                             mPhoneNumber.setText(phoneNum);
                             mTrueName.setText(trueName);
-                            Picasso.with(PayActivity.this).load(url).fit().into(mImage);
+                            Glide.with(PayActivity.this).load(url).into(mImage);
                             Log.e(TAG,""+response.body().getData().getOrderCharge());
                         }
                     });

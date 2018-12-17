@@ -15,16 +15,15 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.zlb.R;
 import com.example.zlb.api.IUser;
 import com.example.zlb.bean.CallBackBaseBean;
 
 import com.example.zlb.bean.MessageEvent;
 import com.example.zlb.common.MyGlideEngine;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -119,7 +118,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
         email = intent.getStringExtra("email");
         url = intent.getStringExtra("url");
 
-        Picasso.with(this).load(url).into(mUserImage);
+        Glide.with(this).load(url).into(mUserImage);
 
         mNickName.setText(nickname);
         if (sex.equals("") || sex == null){
@@ -276,7 +275,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                             int status = response.body().getStatus();
                             if (status == 0){
                                 String url = SERVICE_URL + "/static/image"+response.body().getMsg();
-                                Picasso.with(UpdatePersonalDataActivity.this).load(url).into(mUserImage);
+                                Glide.with(UpdatePersonalDataActivity.this).load(url).into(mUserImage);
                                 EventBus.getDefault().post(new MessageEvent("refresh"));
                             } else if (status == 1){
                                 showToast("上传失败");

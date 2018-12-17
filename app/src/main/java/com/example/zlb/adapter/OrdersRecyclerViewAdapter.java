@@ -9,12 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.zlb.R;
 import com.example.zlb.bean.GetOneOrdersBean;
 import com.example.zlb.ui.activity.PayActivity;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -71,7 +71,7 @@ public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean
         mOrderName.setText(orderName);
         mOrderCharge.setText(orderCharge);
         mOrderDescription.setText(orderDescription);
-        Picasso.with(mContext).load(url).fit().into(mImage);
+        Glide.with(mContext).load(url).into(mImage);
 
         mItem.setOnClickListener(new View.OnClickListener() {
             @Override
