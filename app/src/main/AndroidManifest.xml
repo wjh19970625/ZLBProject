@@ -1,141 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zlb">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEM"/>
-
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEM" />
 
     <application
+        android:name=".ui.MyApplication"
         android:allowBackup="true"
         android:exported="true"
-        android:largeHeap="true"
         android:icon="@drawable/app_logo"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@drawable/app_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".ui.MyApplication">
-        <activity android:name=".ui.activity.SplashActivity" android:screenOrientation="userPortrait" android:theme="@style/NoTitleTheme">
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/file_paths_public" />
+
+        <activity
+            android:name=".ui.activity.SplashActivity"
+            android:screenOrientation="userPortrait"
+            android:theme="@style/NoTitleTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activity.MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="singleTask"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.RegisterActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.AboutUsActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.PersonalDataActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.UpdatePersonalDataActivity"
             android:screenOrientation="userPortrait"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.ArticleDetailModeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.FeedBackActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.MoreActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.ChangePasswordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.ProductDetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.ForgetPasswordActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.AuthenticationActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.MarketDetailModeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.OrderActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.SubmitOrderActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name=".ui.activity.PayActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/NoTitleTheme">
-        </activity>
-
+            android:theme="@style/NoTitleTheme"></activity>
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind">
-        </activity>
+            android:screenOrientation="behind"></activity>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.xx.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths_public"></meta-data>
+        </provider>
     </application>
+
 </manifest>

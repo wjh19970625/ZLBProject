@@ -1,8 +1,5 @@
 package com.wjh.utillibrary.common;
 
-import android.os.Environment;
-
-import java.io.File;
 
 public class Config {
     //y1857e9044.iask.in:21909测试
@@ -13,8 +10,4 @@ public class Config {
 
     public static final int SPLASH_CODE = 10000;
 
-    public static final String STORAGE_PATH = Environment.getExternalStorageDirectory().getPath()+
-            File.separator+"ZhiLiBao"+File.separator;
-
-    public static final String UPLOAD_IMAGE_NAME="uploadImage.jpg";
 }

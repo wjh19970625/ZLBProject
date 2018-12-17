@@ -19,6 +19,7 @@ import com.example.zlb.adapter.ItemRecyclerAdapter;
 import com.example.zlb.api.IUser;
 import com.example.zlb.bean.LoginBean;
 import com.example.zlb.bean.MeItemBean;
+import com.example.zlb.bean.MessageEvent;
 import com.example.zlb.bean.UserInfBean;
 import com.example.zlb.ui.activity.AboutUsActivity;
 import com.example.zlb.ui.activity.AuthenticationActivity;
@@ -43,6 +44,10 @@ import retrofit2.Response;
 
 import com.wjh.utillibrary.utils.UserInfoHelper;
 import com.wjh.utillibrary.view.CircleImageView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -86,6 +91,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -171,21 +177,14 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
         mOrderRv.setLayoutManager(new GridLayoutManager(getContext(),3, GridLayoutManager.VERTICAL,false));
     }
 
-    //懒加载
-
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        Log.e(TAG, " setUserVisibleHint() --> isVisibleToUser = " + isVisibleToUser);
-
-        if (isVisibleToUser) {
-            String token = UserInfoHelper.getInstance().getToken();
-            if (token != null && !token.equals("")){
-                autoLogin();
-            }
+    public void onResume() {
+        super.onResume();
+        String token = UserInfoHelper.getInstance().getToken();
+        if (token != null && !token.equals("")){
+            autoLogin();
         }
-        super.setUserVisibleHint(isVisibleToUser);
     }
-
 
     @Override
     public void onClick(View view) {
@@ -438,5 +437,18 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
                     });
 
         }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void refresh(MessageEvent messageEvent) {
+        if (messageEvent.getMessage().equals("refresh")){
+            getUserData();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }
