@@ -16,6 +16,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.zlb.R;
 import com.example.zlb.api.IUser;
 import com.example.zlb.bean.CallBackBaseBean;
@@ -117,8 +119,9 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
         phoneNumber = intent.getStringExtra("phoneNumber");
         email = intent.getStringExtra("email");
         url = intent.getStringExtra("url");
-
-        Glide.with(this).load(url).into(mUserImage);
+        RequestOptions options = new RequestOptions();
+        options.diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
+        Glide.with(this).load(url).apply(options).into(mUserImage);
 
         mNickName.setText(nickname);
         if (sex.equals("") || sex == null){
@@ -275,7 +278,9 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                             int status = response.body().getStatus();
                             if (status == 0){
                                 String url = SERVICE_URL + "/static/image"+response.body().getMsg();
-                                Glide.with(UpdatePersonalDataActivity.this).load(url).into(mUserImage);
+                                RequestOptions options = new RequestOptions();
+                                options.diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
+                                Glide.with(UpdatePersonalDataActivity.this).load(url).apply(options).into(mUserImage);
                                 EventBus.getDefault().post(new MessageEvent("refresh"));
                             } else if (status == 1){
                                 showToast("上传失败");

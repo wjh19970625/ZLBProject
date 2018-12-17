@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.awen.photo.photopick.controller.PhotoPagerConfig;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.zlb.R;
 import com.example.zlb.api.IUser;
 import com.example.zlb.bean.UserInfBean;
@@ -26,6 +28,7 @@ import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
 import com.wjh.utillibrary.utils.UserInfoHelper;
+import com.wjh.utillibrary.view.dialog.DialogTool;
 
 public class PersonalDataActivity extends ActionBarActivity {
     private final static String TAG = PersonalDataActivity.class.getSimpleName();
@@ -86,24 +89,39 @@ public class PersonalDataActivity extends ActionBarActivity {
         mExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PersonalDataActivity.this,R.style.Theme_AppCompat_DayNight_Dialog_Alert);
-                builder.setTitle("退出当前账号")
-                        .setMessage("退出后将返回用户界面")
-                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+//                AlertDialog.Builder builder = new AlertDialog.Builder(PersonalDataActivity.this,R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+//                builder.setTitle("退出当前账号")
+//                        .setMessage("退出后将返回用户界面")
+//                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//
+//                            }
+//                        })
+//                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                Log.e("PersonalDataActivity","---------------->退出当前用户");
+//                                setResult(RESULT_OK);
+//                                finish();
+//                            }
+//                        });
+//                builder.show();
+                DialogTool dialogTool = new DialogTool(PersonalDataActivity.this);
+                dialogTool.dialogShow("退出登录");
+                dialogTool.setOnDialogClickListener(new DialogTool.OnDialogClickListener() {
+                    @Override
+                    public void onDialogOkClick() {
+                        Log.e("PersonalDataActivity","---------------->退出当前用户");
+                        setResult(RESULT_OK);
+                        finish();
+                    }
 
-                            }
-                        })
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                Log.e("PersonalDataActivity","---------------->退出当前用户");
-                                setResult(RESULT_OK);
-                                finish();
-                            }
-                        });
-                builder.show();
+                    @Override
+                    public void onDialogCancelClick() {
+
+                    }
+                });
             }
         });
 
@@ -180,9 +198,12 @@ public class PersonalDataActivity extends ActionBarActivity {
                                 int role = data.getRole();
                                 int state = data.getState();
                                 url = Config.SERVICE_URL + "/static/image" + response.body().getData().getImage();
+                                RequestOptions options = new RequestOptions();
+                                options.diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
                                 Glide
                                         .with(PersonalDataActivity.this)
                                         .load(url)
+                                        .apply(options)
                                         .into(mUserImage);
                                 //只有认证成功后才会显示性别与生日的信息
                                 if (state == 0){

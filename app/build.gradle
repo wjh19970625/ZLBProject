@@ -10,8 +10,8 @@ android {
         applicationId "com.example.zlb"
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -68,6 +68,8 @@ dependencies {
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-16'//没有使用特殊Header，可以不加这行
 
     api 'com.zhihu.android:matisse:0.4.3'
+
+    api 'org.greenrobot:eventbus:3.0.0'
 
     implementation project(":utillibrary")
 }

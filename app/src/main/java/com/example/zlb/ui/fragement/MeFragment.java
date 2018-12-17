@@ -1,5 +1,7 @@
 package com.example.zlb.ui.fragement;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,12 +14,17 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.zlb.R;
 import com.example.zlb.adapter.ItemRecyclerAdapter;
+import com.example.zlb.api.IIndex;
 import com.example.zlb.api.IUser;
+import com.example.zlb.bean.CallBackBaseBean;
 import com.example.zlb.bean.LoginBean;
 import com.example.zlb.bean.MeItemBean;
 import com.example.zlb.bean.MessageEvent;
@@ -42,14 +49,18 @@ import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
 
+import com.wjh.utillibrary.utils.ApkUpdate;
+import com.wjh.utillibrary.utils.CommonUtil;
 import com.wjh.utillibrary.utils.UserInfoHelper;
 import com.wjh.utillibrary.view.CircleImageView;
+import com.wjh.utillibrary.view.dialog.DialogTool;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import static android.app.Activity.RESULT_OK;
+import static com.wjh.utillibrary.common.Config.SERVICE_URL;
 
 public class MeFragment extends BaseFragment implements View.OnClickListener{
     private final static String TAG = MeFragment.class.getSimpleName();
@@ -62,6 +73,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
     private LinearLayout mChangePassword;
     private LinearLayout mAuthentication;
     private LinearLayout mOrderAll;
+    private LinearLayout mUpdate;
     private RecyclerView mOrderRv;
     private TextView mNickname;
     private TextView mState;
@@ -116,6 +128,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
         mAuthentication = view.findViewById(R.id.authentication);
         mUserImage = view.findViewById(R.id.user_image);
         mOrderAll = view.findViewById(R.id.order_all);
+        mUpdate = view.findViewById(R.id.update);
 
         mUserRl.setOnClickListener(this);
         mAboutUs.setOnClickListener(this);
@@ -124,6 +137,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
         mChangePassword.setOnClickListener(this);
         mAuthentication.setOnClickListener(this);
         mOrderAll.setOnClickListener(this);
+        mUpdate.setOnClickListener(this);
     }
 
     @Override
@@ -254,6 +268,40 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
                     showToast("请先登录");
                 }
                 break;
+            case R.id.update:
+                int versionNum = Integer.parseInt(CommonUtil.getVersionCode(getActivity()));
+                IIndex indexOb = RetrofitHelper.create(IIndex.class);
+                indexOb.checkVersion(RetrofitHelper.getBody(new JsonItem("versionNum",versionNum)))
+                        .enqueue(new MsgCallBack<CallBackBaseBean>(getContext()) {
+                            @Override
+                            public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
+
+                            }
+
+                            @Override
+                            public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
+                                int status = response.body().getStatus();
+                                final String msg = response.body().getMsg();
+                                if (status == 0){
+                                    DialogTool dialogTool = new DialogTool(getActivity());
+                                    dialogTool.dialogShow("更新确认后无法停止");
+                                    dialogTool.setOnDialogClickListener(new DialogTool.OnDialogClickListener() {
+                                        @Override
+                                        public void onDialogOkClick() {
+                                            ApkUpdate apkUpdate = new ApkUpdate(getActivity(),SERVICE_URL + msg);
+                                            apkUpdate.doUpdate();
+                                        }
+
+                                        @Override
+                                        public void onDialogCancelClick() {
+
+                                        }
+                                    });
+                                } else {
+                                    showToast(msg);
+                                }
+                            }
+                        });
         }
     }
 
@@ -352,12 +400,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
                         if (status == 0){
                             UserInfBean.Data data = response.body().getData();
                             String nickname = data.getNickname();
-                            String imageUrl = Config.SERVICE_URL + "/static/image" + data.getImage();
+                            String imageUrl = SERVICE_URL + "/static/image" + data.getImage();
 
-                            Glide
-                                    .with(getContext())
-                                    .load(imageUrl)
-                                    .into(mUserImage);
+
+                            RequestOptions options = new RequestOptions();
+                            options.diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
+                            Glide.with(getContext()).load(imageUrl).apply(options).into(mUserImage);
 
                             int state = data.getState();
                             int role = data.getRole();

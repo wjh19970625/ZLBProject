@@ -4,4 +4,5 @@
     <color name="app_text_dark">#333333</color>  <!--app字体颜色 程序默认色-->
     <color name="app_line">#F5F5F5</color>
     <color name="toolbar_title">#000000</color>
+    <color name="blue">#11baff</color>
 </resources>
