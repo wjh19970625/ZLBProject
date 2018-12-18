@@ -81,7 +81,7 @@ public class LoginActivity extends WidgetActivity {
                 if (nickname != null || !nickname.equals("") || password != null || !password.equals("")){
                     IUser userObj = RetrofitHelper.create(IUser.class);
                     userObj.login(RetrofitHelper.getBody(new JsonItem("nickname",nickname),new JsonItem("password",password)))
-                            .enqueue(new MsgCallBack<LoginBean>(LoginActivity.this) {
+                            .enqueue(new MsgCallBack<LoginBean>(LoginActivity.this,true) {
                                 @Override
                                 public void onFailed(Call<LoginBean> call, Throwable t) {
 

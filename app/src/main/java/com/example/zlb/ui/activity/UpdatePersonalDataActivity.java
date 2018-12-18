@@ -156,6 +156,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
     @Override
     public void init() {
         super.init();
+        //选择头像
         mChangeImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -240,6 +241,8 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
             }
         });
     }
+
+    //获得图片路径
     public static String getRealPathFromUri(Context context, Uri contentUri) {
         Cursor cursor = null;
         try {
@@ -281,6 +284,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                                 RequestOptions options = new RequestOptions();
                                 options.diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true);
                                 Glide.with(UpdatePersonalDataActivity.this).load(url).apply(options).into(mUserImage);
+                                //头像上传成功后通知个人中心刷新数据
                                 EventBus.getDefault().post(new MessageEvent("refresh"));
                             } else if (status == 1){
                                 showToast("上传失败");

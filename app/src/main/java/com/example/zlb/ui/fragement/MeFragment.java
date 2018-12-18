@@ -454,7 +454,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
 
         }
     }
-
+    //接收重新获取数据通知
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void refresh(MessageEvent messageEvent) {
         if (messageEvent.getMessage().equals("refresh")){

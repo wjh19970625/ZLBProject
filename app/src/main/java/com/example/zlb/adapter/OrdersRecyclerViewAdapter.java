@@ -44,7 +44,7 @@ public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean
         final int state = item.getState();
         String orderDescription = item.getOrderDescription();
         String orderCharge = item.getOrderCharge();
-        String url = SERVICE_URL + item.getImage();
+        String url = SERVICE_URL +"/static/image"+ item.getImage();
 
         switch (state){
             case 0:
