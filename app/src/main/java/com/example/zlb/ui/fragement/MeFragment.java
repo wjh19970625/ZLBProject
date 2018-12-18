@@ -269,39 +269,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener{
                 }
                 break;
             case R.id.update:
-                int versionNum = Integer.parseInt(CommonUtil.getVersionCode(getActivity()));
-                IIndex indexOb = RetrofitHelper.create(IIndex.class);
-                indexOb.checkVersion(RetrofitHelper.getBody(new JsonItem("versionNum",versionNum)))
-                        .enqueue(new MsgCallBack<CallBackBaseBean>(getContext()) {
-                            @Override
-                            public void onFailed(Call<CallBackBaseBean> call, Throwable t) {
 
-                            }
-
-                            @Override
-                            public void onSucceed(Call<CallBackBaseBean> call, Response<CallBackBaseBean> response) {
-                                int status = response.body().getStatus();
-                                final String msg = response.body().getMsg();
-                                if (status == 0){
-                                    DialogTool dialogTool = new DialogTool(getActivity());
-                                    dialogTool.dialogShow("更新确认后无法停止");
-                                    dialogTool.setOnDialogClickListener(new DialogTool.OnDialogClickListener() {
-                                        @Override
-                                        public void onDialogOkClick() {
-                                            ApkUpdate apkUpdate = new ApkUpdate(getActivity(),SERVICE_URL + msg);
-                                            apkUpdate.doUpdate();
-                                        }
-
-                                        @Override
-                                        public void onDialogCancelClick() {
-
-                                        }
-                                    });
-                                } else {
-                                    showToast(msg);
-                                }
-                            }
-                        });
         }
     }
 

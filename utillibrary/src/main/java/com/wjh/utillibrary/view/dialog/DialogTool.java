@@ -93,12 +93,12 @@ public class DialogTool {
     /**
      * @param content     内容
      * @param ok          确定
-     * @param cancle      取消
+     * @param cancel      取消
      */
-    public DialogTool dialogShow(String content, String cancle, String ok) {
+    public DialogTool dialogShow(String content, String cancel, String ok) {
         infoShow();
         mContent.setText(Html.fromHtml(content));
-        mCancel.setText(cancle);
+        mCancel.setText(cancel);
         mConfirm.setText(ok);
         onClick();
         return this;

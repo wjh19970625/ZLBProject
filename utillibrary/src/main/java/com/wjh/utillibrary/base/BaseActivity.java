@@ -2,6 +2,7 @@ package com.wjh.utillibrary.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -19,12 +20,14 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivity;
 public abstract class BaseActivity extends SwipeBackActivity {
     ProgressDialog progressDialog;
     private boolean isDestroyed = false;
+    protected Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusColor();
         setSystemInvadeBlack();
+        mContext = this;
     }
 
     /*吐司提示*/
