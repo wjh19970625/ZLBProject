@@ -7,13 +7,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 
-import com.example.zlb.R;
-
-import com.wjh.utillibrary.base.WidgetActivity;
+import com.wjh.utillibrary.base.BaseActivity;
 import com.wjh.utillibrary.common.Config;
 import crossoverone.statuslib.StatusUtil;
 
-public class SplashActivity extends WidgetActivity {
+public class SplashActivity extends BaseActivity {
     class SplashHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
@@ -35,11 +33,6 @@ public class SplashActivity extends WidgetActivity {
         setSwipeBackEnable(false);
         SplashHandler handler = new SplashHandler();
         handler.sendEmptyMessageDelayed(Config.SPLASH_CODE,3000);
-    }
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_splash;
     }
 
     @Override

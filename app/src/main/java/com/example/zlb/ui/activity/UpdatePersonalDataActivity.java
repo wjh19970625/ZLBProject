@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
@@ -35,7 +34,8 @@ import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import com.wjh.utillibrary.utils.Utils;
+
+import com.wjh.utillibrary.utils.CommonUtil;
 import com.wjh.utillibrary.view.CircleImageView;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
@@ -181,10 +181,10 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                 if (a_ddress !=null && !a_ddress.equals("")){
                     address = a_ddress;
                     if (phone != null && !phone.equals("")){
-                        if (Utils.isPhoneNumber(phone)){
+                        if (CommonUtil.isPhoneNumber(phone)){
                             phoneNumber = phone;
                             if(e_mail != null && !e_mail.equals("")){
-                                if (Utils.isEmail(e_mail)){
+                                if (CommonUtil.isEmail(e_mail)){
                                     email = e_mail;
                                     update();
                                 }else {
@@ -198,7 +198,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                         }
                     }else {
                         if(e_mail != null && !e_mail.equals("")){
-                            if (Utils.isEmail(e_mail)){
+                            if (CommonUtil.isEmail(e_mail)){
                                 email = e_mail;
                                 update();
                             }else {
@@ -210,10 +210,10 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                     }
                 }else {
                     if (phone != null && !phone.equals("")){
-                        if (Utils.isPhoneNumber(phone)){
+                        if (CommonUtil.isPhoneNumber(phone)){
                             phoneNumber = phone;
                             if(e_mail != null && !e_mail.equals("")){
-                                if (Utils.isEmail(e_mail)){
+                                if (CommonUtil.isEmail(e_mail)){
                                     email = e_mail;
                                     update();
                                 }else {
@@ -227,7 +227,7 @@ public class UpdatePersonalDataActivity extends ActionBarActivity {
                         }
                     }else {
                         if(e_mail != null && !e_mail.equals("")){
-                            if (Utils.isEmail(e_mail)){
+                            if (CommonUtil.isEmail(e_mail)){
                                 email = e_mail;
                                 update();
                             }else {

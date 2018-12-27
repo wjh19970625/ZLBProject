@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
@@ -30,9 +29,10 @@ import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
+
+import com.wjh.utillibrary.utils.CommonUtil;
 import com.wjh.utillibrary.utils.PayResult;
 import com.wjh.utillibrary.utils.UserInfoHelper;
-import com.wjh.utillibrary.utils.Utils;
 
 import static com.wjh.utillibrary.common.Config.SERVICE_URL;
 
@@ -71,6 +71,7 @@ public class PayActivity extends ActionBarActivity {
                     if (TextUtils.equals(resultStatus, "9000")) {
                         // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                         showToast("支付成功");
+                        finish();
                     } else {
                         // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                         showToast("支付失败");
@@ -133,7 +134,7 @@ public class PayActivity extends ActionBarActivity {
                             String orderName = response.body().getData().getOrderName();
                             String orderDescription = response.body().getData().getOrderDescription();
                             String orderCharge = response.body().getData().getOrderCharge();
-                            String payTime = Utils.timeStamp2Date(response.body().getData().getPayTime(),null);
+                            String payTime = CommonUtil.timeStamp2Date(response.body().getData().getPayTime(),null);
                             String phoneNum = response.body().getData().getContact();
                             String trueName = response.body().getData().getName();
                             String url = SERVICE_URL + "/static/image" + response.body().getData().getImage();

@@ -94,4 +94,10 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
+    <style name="app_splash_theme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@mipmap/ic_welcome</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
 </resources>

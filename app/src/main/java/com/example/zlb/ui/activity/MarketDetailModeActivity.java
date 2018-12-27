@@ -19,7 +19,8 @@ import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import com.wjh.utillibrary.utils.Utils;
+
+import com.wjh.utillibrary.utils.CommonUtil;
 
 import static com.wjh.utillibrary.common.Config.SERVICE_URL;
 
@@ -77,7 +78,7 @@ public class MarketDetailModeActivity extends WidgetActivity {
                                 String views = data.getViews();
                                 String content = data.getContent();
                                 long createTime = data.getCreateTime();
-                                String time = Utils.timeStamp2Date(createTime,null);
+                                String time = CommonUtil.timeStamp2Date(createTime,null);
 
                                 Glide
                                         .with(MarketDetailModeActivity.this)

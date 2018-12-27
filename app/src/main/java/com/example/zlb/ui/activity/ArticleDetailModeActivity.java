@@ -14,9 +14,10 @@ import com.wjh.utillibrary.base.ActionBarActivity;
 import com.wjh.utillibrary.network.RetrofitHelper;
 import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
+import com.wjh.utillibrary.utils.CommonUtil;
+
 import retrofit2.Call;
 import retrofit2.Response;
-import com.wjh.utillibrary.utils.Utils;
 
 public class ArticleDetailModeActivity extends ActionBarActivity {
     private final static String TAG = ArticleDetailModeActivity.class.getSimpleName();
@@ -59,7 +60,7 @@ public class ArticleDetailModeActivity extends ActionBarActivity {
                             if (status == 0){
                                 String content = response.body().getData().getContent();
                                 long time = response.body().getData().getUpdate_time();
-                                String timeStr = Utils.timeStamp2Date(time,null);
+                                String timeStr = CommonUtil.timeStamp2Date(time,null);
 
                                 mTitle.setText(title);
                                 mTime.setText(timeStr);

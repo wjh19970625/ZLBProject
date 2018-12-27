@@ -19,7 +19,8 @@ import com.wjh.utillibrary.network.base.JsonItem;
 import com.wjh.utillibrary.network.callback.MsgCallBack;
 import retrofit2.Call;
 import retrofit2.Response;
-import com.wjh.utillibrary.utils.Utils;
+
+import com.wjh.utillibrary.utils.CommonUtil;
 
 public class ForgetPasswordActivity extends ActionBarActivity {
     private EditText mNickname;
@@ -84,7 +85,7 @@ public class ForgetPasswordActivity extends ActionBarActivity {
                 String nickname = mNickname.getText().toString();
                 if (nickname != null && !nickname.equals("")){
                     if (phoneNumber != null && !phoneNumber.equals("")){
-                        if(Utils.isPhoneNumber(phoneNumber)){
+                        if(CommonUtil.isPhoneNumber(phoneNumber)){
                             mGetPinTv.setEnabled(false);
                             mGetPinTv.setText(count+Str);
                             handler.sendEmptyMessage(CODE_WHAT);

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.example.zlb.R;
 
 import com.wjh.utillibrary.base.ActionBarActivity;
-import com.wjh.utillibrary.utils.Utils;
+import com.wjh.utillibrary.utils.CommonUtil;
 
 
 public class AboutUsActivity extends ActionBarActivity {
@@ -38,7 +38,7 @@ public class AboutUsActivity extends ActionBarActivity {
                 "中小学生及政府公共服务平台提供在线知识产权代理及交易服务、法律服务、知识产权教育及创新创" +
                 "意思维成果转化等全方位知识产权互联网创新型平台，开创互联网+知识产权的全新模式，对知识产权" +
                 "行业的发展和变革具有重要意义。";
-        String content = Utils.ToDBC(data);
+        String content = CommonUtil.ToDBC(data);
         mContent.setText(content);
     }
 

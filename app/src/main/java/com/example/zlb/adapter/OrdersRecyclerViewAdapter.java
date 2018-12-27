@@ -51,7 +51,7 @@ public class OrdersRecyclerViewAdapter extends BaseQuickAdapter<GetOneOrdersBean
                 mIsPaid.setText("交易完成");
                 break;
             case 1:
-                mIsPaid.setText("未处理");
+                mIsPaid.setText("未受理");
                 break;
             case 2:
                 mIsPaid.setText("处理中");

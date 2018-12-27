@@ -15,7 +15,7 @@ import com.example.zlb.ui.activity.ArticleDetailModeActivity;
 
 import java.util.List;
 
-import com.wjh.utillibrary.utils.Utils;
+import com.wjh.utillibrary.utils.CommonUtil;
 
 public class TitleRecyclerViewAdapter extends BaseQuickAdapter<ArticleTitleBean.Data, BaseViewHolder> {
     private Context context;
@@ -31,7 +31,7 @@ public class TitleRecyclerViewAdapter extends BaseQuickAdapter<ArticleTitleBean.
         TextView mUpdateTime = helper.getView(R.id.update_time);
         LinearLayout mTitleLayout = helper.getView(R.id.title_layout);
 
-        String time = Utils.timeStamp2Date(item.getUpdateTime(),null);
+        String time = CommonUtil.timeStamp2Date(item.getUpdateTime(),null);
 
         mTitle.setText(item.getTitle());
         mUpdateTime.setText(time);
